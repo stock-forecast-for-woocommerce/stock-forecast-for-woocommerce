@@ -1,0 +1,65 @@
+// =====================================================
+// Admin UI - Settings Component
+// =====================================================
+
+@use "../prefix" as *;
+
+.#{css-class('wrap')} {
+
+  .#{css-class('settings')} {
+
+    &__section {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__item {
+      display: flex;
+      align-items: flex-start;
+      padding: 1rem 0;
+      gap: .375rem;
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      &:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+    }
+
+    &__label {
+      flex: 0 0 15rem;
+
+      label {
+        display: block;
+      }
+    }
+
+    &__field {
+      flex: 1;
+    }
+
+    @media (max-width: 768px) {
+
+      &__item {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      &__label {
+        flex: none;
+      }
+    }
+
+  }
+
+}

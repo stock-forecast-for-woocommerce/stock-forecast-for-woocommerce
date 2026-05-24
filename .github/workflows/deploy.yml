@@ -1,0 +1,41 @@
+name: Deploy to WordPress.org
+
+on:
+    push:
+        tags:
+            - "v*"
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v4
+
+            -   name: Install SVN
+                run: sudo apt-get update && sudo apt-get install -y subversion
+
+            -   name: Deploy to WordPress.org
+                uses: 10up/action-wordpress-plugin-deploy@stable
+                env:
+                    SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
+                    SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
+                    SLUG: stock-forecast-for-woocommerce
+                with:
+                    exclude: |
+                        .github
+                        .gitignore
+                        .editorconfig
+                        CHANGELOG.md
+                        CONTRIBUTING.md
+                        SECURITY.md
+                        README.md
+                        assets-src
+                        node_modules
+                        package.json
+                        package-lock.json
+                        gulpfile.mjs
+                        config
+                        phpcs.xml
+                        composer.lock

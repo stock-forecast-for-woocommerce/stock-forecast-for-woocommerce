@@ -1,0 +1,108 @@
+// =====================================================
+// Admin UI - Stat Card Component
+// =====================================================
+
+@use "../prefix" as *;
+
+.#{css-class('wrap')} {
+
+  .#{css-class('stat-card')} {
+    display: block;
+    background-color: css-var(card-bg);
+    border-radius: css-var(border-radius-lg);
+    box-shadow: css-var(box-shadow-sm);
+    border: css-var(border-width) solid css-var(border-color);
+    transition: css-var(transition-base);
+
+    --stat-color: #{css-var(primary)};
+    --stat-color-rgb: #{css-var(primary-rgb)};
+
+    border-bottom: 2px solid rgba(var(--stat-color-rgb), 0.25);
+
+    &:hover,
+    &:focus {
+      box-shadow: css-var(box-shadow-lg);
+      border-bottom-color: var(--stat-color);
+    }
+
+    // dynamic color bindings
+    &:has(.#{css-class('stat-card')}__icon--primary) {
+      --stat-color: #{css-var(primary)};
+      --stat-color-rgb: #{css-var(primary-rgb)};
+    }
+
+    &:has(.#{css-class('stat-card')}__icon--success) {
+      --stat-color: #{css-var(success)};
+      --stat-color-rgb: #{css-var(success-rgb)};
+    }
+
+    &:has(.#{css-class('stat-card')}__icon--warning) {
+      --stat-color: #{css-var(warning)};
+      --stat-color-rgb: #{css-var(warning-rgb)};
+    }
+
+    &:has(.#{css-class('stat-card')}__icon--error) {
+      --stat-color: #{css-var(error)};
+      --stat-color-rgb: #{css-var(error-rgb)};
+    }
+
+    &:has(.#{css-class('stat-card')}__icon--info) {
+      --stat-color: #{css-var(info)};
+      --stat-color-rgb: #{css-var(info-rgb)};
+    }
+
+    &__body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 0.65rem;
+      padding: 1.4rem 1.25rem 1.25rem;
+    }
+
+    &__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: css-var(border-radius);
+      flex-shrink: 0;
+
+      background-color: rgba(var(--stat-color-rgb), 0.12);
+
+      span {
+        width: 1.35rem;
+        height: 1.35rem;
+        background-color: var(--stat-color);
+      }
+    }
+
+    &__content {
+      flex: 1;
+      width: 100%;
+      min-width: 0;
+    }
+
+    &__label {
+      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: css-var(heading-color);
+    }
+
+    &__value {
+      margin: 0.35rem 0 0;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.2;
+      color: css-var(heading-color);
+    }
+
+    &__subtitle {
+      margin: 0.15rem 0 0 0;
+      font-size: 0.75rem;
+      color: css-var(muted-color);
+    }
+  }
+}

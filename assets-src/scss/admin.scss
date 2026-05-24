@@ -1,0 +1,44 @@
+// =====================================================
+// Admin UI - Main Entry File
+// =====================================================
+
+// 0) Prefix configuration
+@use "prefix" as *;
+
+// 1) Bootstrap utilities
+@use "bootstrap/functions";
+
+// 2) Base
+@use "base/variables";
+@use "base/variables-dark";
+@use "base/root";
+@use "base/typography";
+@use "base/global";
+
+// 3) Layout
+@use "layout/framework";
+@use "layout/header";
+@use "layout/grid";
+@use "layout/section";
+
+// 4) Form components
+@use "components/forms";
+@use "components/form-check";
+@use "components/input-group";
+
+// 5) Components
+@use "components/icons";
+@use "components/card";
+@use "components/buttons";
+@use "components/notice";
+@use "components/badge";
+@use "components/table";
+@use "components/stat-card";
+@use "components/page-header";
+@use "components/message-card";
+@use "components/product-filters";
+@use "components/pagination";
+@use "components/spinner";
+@use "components/filter-sidebar";
+@use "components/filter-chips";
+@use "components/settings";

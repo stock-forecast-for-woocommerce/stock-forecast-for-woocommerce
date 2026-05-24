@@ -1,0 +1,253 @@
+// =====================================================
+// Admin UI - Filter Sidebar Component
+// =====================================================
+
+@use "../prefix" as *;
+
+.#{css-class('wrap')} {
+
+  .#{css-class('filter-sidebar')} {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+
+    &.is-active {
+      pointer-events: auto;
+
+      .#{css-class('filter-sidebar__overlay')} {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .#{css-class('filter-sidebar__panel')} {
+        transform: translateX(0);
+      }
+    }
+
+    // -------------------------------------------------
+    // Overlay
+    // -------------------------------------------------
+    &__overlay {
+      position: fixed;
+      top: var(--wp-admin--admin-bar--height, 0);
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      background: rgba(0, 0, 0, .5);
+
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+
+    // -------------------------------------------------
+    // Sidebar panel
+    // -------------------------------------------------
+    &__panel {
+      position: fixed;
+      top: var(--wp-admin--admin-bar--height, 0);
+      right: 0;
+      bottom: 0;
+
+      width: 26.25rem;
+      max-width: 100%;
+
+      background: css-var(card-bg);
+      color: css-var(body-color);
+
+      border-left: css-var(border-width) solid css-var(border-color);
+      box-shadow: css-var(box-shadow-lg);
+
+      transform: translateX(100%);
+      transition: transform .35s cubic-bezier(.22, .61, .36, 1);
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    // -------------------------------------------------
+    // Mobile fullscreen
+    // -------------------------------------------------
+    @media (max-width: 36rem) {
+      &__panel {
+        width: 100%;
+        max-width: 100%;
+        border-left: none;
+      }
+    }
+
+    // -------------------------------------------------
+    // Header
+    // -------------------------------------------------
+    &__header {
+      padding: 1rem 1.25rem;
+      border-bottom: css-var(border-width) solid css-var(border-color);
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      background: css-var(card-bg);
+    }
+
+    &__title {
+      font-size: css-var(font-size-lg);
+      font-weight: css-var(font-weight-semibold);
+      margin: 0;
+      color: css-var(heading-color);
+    }
+
+    // -------------------------------------------------
+    // Close button
+    // -------------------------------------------------
+    &__close {
+      width: 2.125rem;
+      height: 2.125rem;
+
+      border: none;
+      border-radius: css-var(border-radius);
+      background: transparent;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+
+      color: css-var(muted-color);
+      transition: css-var(transition-base);
+
+      &:hover {
+        color: css-var(body-color);
+        background: css-var(gray-100);
+      }
+
+      span {
+        font-size: 1rem;
+        line-height: 1;
+      }
+    }
+
+    // -------------------------------------------------
+    // Form
+    // -------------------------------------------------
+    &__form {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+    }
+
+    // -------------------------------------------------
+    // Body
+    // -------------------------------------------------
+    &__body {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      touch-action: pan-y;
+
+      padding: 1.25rem;
+      -webkit-overflow-scrolling: touch;
+
+      scrollbar-width: thin;
+      scrollbar-color: css-var(gray-400) transparent;
+
+      &::-webkit-scrollbar {
+        width: .375rem;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: css-var(gray-400);
+        border-radius: css-var(border-radius-pill);
+      }
+    }
+
+    // -------------------------------------------------
+    // Footer (sticky actions)
+    // -------------------------------------------------
+    &__footer {
+      padding: 1rem 1.25rem;
+
+      border-top: css-var(border-width) solid css-var(border-color);
+      background: css-var(card-bg);
+
+      display: flex;
+      gap: .75rem;
+      justify-content: flex-end;
+    }
+
+    // -------------------------------------------------
+    // Filter groups
+    // -------------------------------------------------
+    &__group {
+      margin-bottom: 1.5rem;
+    }
+
+    &__group-title {
+      font-size: css-var(font-size-sm);
+      font-weight: css-var(font-weight-semibold);
+      color: css-var(muted-color);
+
+      margin-bottom: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+
+    &__field {
+      margin-bottom: .75rem;
+    }
+
+    label {
+      font-size: css-var(font-size-sm);
+      color: css-var(body-color);
+      cursor: pointer;
+    }
+
+  }
+
+  // -------------------------------------------------
+  // Filter button badge
+  // -------------------------------------------------
+  .#{css-class('filter-toggle')} {
+    position: relative;
+  }
+
+  .#{css-class('filter-count')} {
+
+    display: none;
+
+    min-width: 1.25rem;
+    height: 1.25rem;
+
+    padding: 0 .35rem;
+
+    margin-left: .4rem;
+
+    border-radius: css-var(border-radius-pill);
+
+    font-size: .6875rem;
+    font-weight: css-var(font-weight-semibold);
+
+    background: css-var(primary);
+    color: css-var(white);
+
+    align-items: center;
+    justify-content: center;
+
+    &#{data-attr('count')}:not(#{data-attr('count', '0')}) {
+      display: inline-flex;
+    }
+  }
+
+}
+
+// -------------------------------------------------
+// Lock scroll when sidebar open
+// -------------------------------------------------
+body.#{css-class('sidebar-open')} {
+  overflow: hidden;
+}

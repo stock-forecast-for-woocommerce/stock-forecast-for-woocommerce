@@ -1,0 +1,116 @@
+// =====================================================
+// Admin UI - Pagination Component
+// =====================================================
+
+@use "../prefix" as *;
+
+.#{css-class('wrap')} {
+
+  .#{css-class('pagination')} {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    font-size: css-var(font-size-sm);
+    color: css-var(body-color);
+  }
+
+  // items count
+  .#{css-class('displaying-num')} {
+    margin-right: 0.25rem;
+    font-weight: css-var(font-weight-medium);
+    color: css-var(muted-color);
+    white-space: nowrap;
+  }
+
+  // page buttons
+  .#{css-class('page-link')} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 2rem;
+    height: 2rem;
+    padding: 0 0.5rem;
+
+    font-size: css-var(font-size-sm);
+
+    background: css-var(paper-bg);
+    color: css-var(body-color);
+
+    border: 1px solid css-var(border-color);
+    border-radius: css-var(border-radius);
+
+    text-decoration: none;
+    cursor: pointer;
+
+    transition: css-var(transition-base);
+
+    &:hover {
+      background: css-var(gray-100);
+      border-color: css-var(gray-300);
+      color: css-var(heading-color);
+    }
+
+    &:focus {
+      outline: none;
+      border-color: css-var(secondary);
+      box-shadow: 0 0 0 0.15rem rgba(css-var(secondary), .25);
+    }
+
+    &.#{css-class('disabled')} {
+      opacity: .6;
+      cursor: not-allowed;
+      pointer-events: none;
+
+      background: css-var(input-disabled-bg);
+      border-color: css-var(input-disabled-border-color);
+      color: css-var(muted-color);
+    }
+  }
+
+  // page input wrapper
+  .#{css-class('page-input')} {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.175rem;
+  }
+
+  // page number input
+  input[type=text].#{css-class('paged')} {
+    width: 3rem;
+    text-align: center;
+  }
+
+  // total pages text
+  .#{css-class('page-total')} {
+    color: css-var(muted-color);
+    white-space: nowrap;
+  }
+
+  // Rows per page wrapper
+  .#{css-class('per-page')} {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+
+    label {
+      white-space: nowrap;
+      font-size: css-var(font-size-sm);
+      color: css-var(muted-color);
+    }
+
+    select {
+      width: auto;
+      max-width: 100px;
+    }
+
+    @media (max-width: 576px) {
+      select {
+        width: 90px;
+      }
+    }
+  }
+
+}

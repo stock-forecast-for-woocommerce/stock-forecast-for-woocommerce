@@ -1,0 +1,135 @@
+<?php
+
+namespace StockForecastForWooCommerce\Utils;
+
+use StockForecastForWooCommerce\Config\PrefixConfig;
+
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/**
+ * Class PluginUtils
+ *
+ * A utility class for managing WordPress plugins programmatically.
+ *
+ * @package StockForecastForWooCommerce\Utils
+ * @version 1.0.0
+ */
+class PluginUtils
+{
+
+    /**
+     * Get all installed plugins.
+     *
+     * @return array An associative array of all installed plugins.
+     */
+    public static function getAllPlugins(): array
+    {
+        if (!function_exists('get_plugins')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+        return get_plugins();
+    }
+
+    /**
+     * Check if a plugin exists by its file path.
+     *
+     * @param string $pluginFile Plugin file path (e.g., "plugin-folder/plugin-file.php").
+     * @return bool True if the plugin exists, false otherwise.
+     */
+    public static function pluginExists(string $pluginFile): bool
+    {
+        $allPlugins = self::getAllPlugins();
+        return isset($allPlugins[$pluginFile]);
+    }
+
+    /**
+     * Check if a plugin is active.
+     *
+     * @param string $pluginFile Plugin file path.
+     * @return bool True if the plugin is active, false otherwise.
+     */
+    public static function isPluginActive(string $pluginFile): bool
+    {
+        if (!function_exists('is_plugin_active')) {
+            require_once ABSPATH . 'wp-admin/includes/plugin.php';
+        }
+        return is_plugin_active($pluginFile);
+    }
+
+    /**
+     * Get information about a plugin.
+     *
+     * @param string $pluginFile Plugin file path.
+     * @return array|null Plugin information array or null if plugin does not exist.
+     */
+    public static function getPluginInfo(string $pluginFile): ?array
+    {
+        $allPlugins = self::getAllPlugins();
+        return $allPlugins[$pluginFile] ?? null;
+    }
+
+    /**
+     * Check plugin dependencies.
+     *
+     * @param array $requiredPlugins List of required plugin file paths.
+     * @return array Returns an array of missing or inactive plugins. Empty array if all dependencies are met.
+     */
+    public static function checkDependencies(array $requiredPlugins): array
+    {
+        $missing = [];
+
+        foreach ($requiredPlugins as $pluginFile) {
+            if (!self::pluginExists($pluginFile) || !self::isPluginActive($pluginFile)) {
+                $missing[] = $pluginFile;
+            }
+        }
+
+        return $missing;
+    }
+
+    /**
+     * Determine whether the current admin screen belongs to this plugin.
+     *
+     * @return bool
+     */
+    public static function isPluginScreen(): bool
+    {
+        if (!function_exists('get_current_screen')) {
+            return false;
+        }
+
+        $screen = get_current_screen();
+
+        if (!$screen || empty($screen->id)) {
+            return false;
+        }
+
+        return strpos($screen->id, PrefixConfig::SLUG) !== false;
+    }
+
+        /**
+     * Determine whether the current admin request is for one of the plugin's pages.
+     *
+     * @return bool
+     */
+    public static function isPluginAdminRequest(): bool
+    {
+        if (!is_admin()) {
+            return false;
+        }
+
+        // Nonce verification is not required for simply checking if the page parameter exists.
+        // This is for navigation detection only, not form processing.
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        if (!isset($_GET['page'])) {
+            return false;
+        }
+
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+        $page = sanitize_key(wp_unslash($_GET['page']));
+
+        return str_starts_with($page, PrefixConfig::SLUG);
+    }
+}

@@ -1,0 +1,22 @@
+// AUTO-GENERATED FILE - DO NOT EDIT
+
+$base: 'sffw' !default;
+
+@function css-class($name) {
+    @return $base + '-' + $name;
+}
+
+@function css-var($name) {
+    @return var(--#{$base}-#{$name});
+}
+
+@function css-var-name($name) {
+  @return --#{$base}-#{$name};
+}
+
+@function data-attr($name, $value: null) {
+    @if $value {
+        @return '[data-#{$base}-#{$name}="#{$value}"]';
+    }
+    @return '[data-#{$base}-#{$name}]';
+}

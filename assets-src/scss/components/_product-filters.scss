@@ -1,0 +1,28 @@
+// =====================================================
+// Admin UI - Product Filters
+// =====================================================
+
+@use "../prefix" as *;
+
+.#{css-class('wrap')} {
+
+  .#{css-class('search-group')} {
+    flex: 1 1 auto;
+
+    @media (min-width: 576px) {
+      flex: 0 0 auto;
+      max-width: 240px;
+    }
+
+    .#{css-class('input-group-text')} {
+      background-color: css-var(paper-bg);
+    }
+  }
+
+  .#{css-class('filter-toggle')} {
+    padding: .4rem .8rem;
+    font-size: .9rem;
+    white-space: nowrap;
+  }
+
+}

@@ -1,0 +1,56 @@
+// =====================================================
+// Admin UI - Active Filter Chips Component
+// =====================================================
+
+@use "../prefix" as *;
+
+.#{css-class('wrap')} {
+
+  .#{css-class('active-filters')} {
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+
+    margin-bottom: .75rem;
+
+  }
+
+  .#{css-class('filter-chip')} {
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: .25rem;
+
+    padding: .25rem .6rem;
+
+    border-radius: css-var(border-radius-pill);
+
+    background: css-var(gray-100);
+    border: css-var(border-width) solid css-var(border-color);
+
+    font-size: css-var(font-size-sm);
+
+  }
+
+  .#{css-class('filter-chip__remove')} {
+
+    border: none;
+    background: transparent;
+    padding: 0;
+
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+
+    color: css-var(muted-color);
+
+    &:hover {
+      color: css-var(error);
+    }
+
+  }
+
+}

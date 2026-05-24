@@ -1,0 +1,628 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Stock Forecast for WooCommerce\n"
+"POT-Creation-Date: 2026-04-23 22:44+0330\n"
+"PO-Revision-Date: 2026-03-09 10:48+0330\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: stock-forecast-for-woocommerce.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: src/Abstracts/AbstractSingleton.php:38 src/Core.php:99
+msgid "Cloning is not allowed."
+msgstr ""
+
+#: src/Abstracts/AbstractSingleton.php:46 src/Core.php:109
+msgid "Instances of this class cannot be unserialized."
+msgstr ""
+
+#: src/Admin/Notices/AdminNotices.php:211
+msgid "Invalid notice ID."
+msgstr ""
+
+#: src/Admin/Notices/AdminNotices.php:216
+#: src/Admin/Notices/AdminNotices.php:222
+msgid "Notice dismissed."
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:187
+#: templates/admin/pages/product-forecast/header.php:39
+#: templates/admin/pages/product-forecast/header.php:43
+msgid "Refresh Forecasts"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:188
+msgid "Refreshing…"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:189
+msgid "Refresh started"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:192
+msgid "Risk"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:193
+#: templates/admin/components/filter-sidebar.php:104
+msgid "Product Type"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:194
+msgid "Stockout"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:195
+#: templates/admin/components/filter-sidebar.php:129
+msgid "Current Stock"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:196
+#: src/Services/Admin/Dashboard/DashboardData.php:201
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:180
+#: templates/admin/components/filter-sidebar.php:148
+msgid "Daily Sales"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:200
+#: src/Services/Admin/Dashboard/DashboardData.php:57
+#: templates/admin/components/filter-sidebar.php:66
+msgid "Safe Stock"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:201
+#: src/Services/Admin/Dashboard/DashboardData.php:65
+#: templates/admin/components/filter-sidebar.php:67
+msgid "Low Stock"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:202
+#: src/Services/Admin/Dashboard/DashboardData.php:73
+#: templates/admin/components/filter-sidebar.php:68
+msgid "Critical Stock"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:203
+#: src/Services/Admin/Dashboard/DashboardData.php:81
+#: src/Utils/DisplayUtils.php:71
+#: templates/admin/components/filter-sidebar.php:69
+msgid "Out of Stock"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:204
+#: src/Services/Admin/Dashboard/DashboardData.php:89
+#: templates/admin/components/filter-sidebar.php:70
+msgid "Backorders"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:207
+#: templates/admin/components/filter-sidebar.php:113
+msgid "Simple"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:208
+#: templates/admin/components/filter-sidebar.php:114
+msgid "Variation"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:211
+#: templates/admin/components/filter-sidebar.php:85
+msgid "≤ 7 days"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:212
+#: templates/admin/components/filter-sidebar.php:86
+msgid "≤ 14 days"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:213
+#: templates/admin/components/filter-sidebar.php:87
+msgid "≤ 30 days"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:214
+#: templates/admin/components/filter-sidebar.php:88
+msgid "≤ 60 days"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:215
+#: templates/admin/components/filter-sidebar.php:89
+msgid "≤ 90 days"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:218
+#: src/AdminUI/Assets/AssetLoader.php:225
+msgid "0"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:219
+msgid "1–10"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:220
+msgid "11–50"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:221
+msgid "51–100"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:222
+msgid "100+"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:226
+msgid "1–5"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:227
+msgid "6–20"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:228
+msgid "21–50"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:229
+msgid "50+"
+msgstr ""
+
+#: src/AdminUI/Assets/AssetLoader.php:232
+msgid "Remove filter"
+msgstr ""
+
+#: src/AdminUI/Theme/ThemeSwitcher.php:136
+msgid "Theme switched successfully."
+msgstr ""
+
+#: src/AdminUI/Theme/ThemeSwitcher.php:139
+msgid "Invalid theme."
+msgstr ""
+
+#: src/Components/AjaxComponent.php:52
+msgid "AJAX error: "
+msgstr ""
+
+#: src/Components/AjaxComponent.php:92
+msgid "Invalid security token."
+msgstr ""
+
+#: src/Components/AjaxComponent.php:114
+msgid "Unauthorized."
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: src/Config/HeaderConfig.php:58
+msgid "Stock Forecast for WooCommerce"
+msgstr ""
+
+#: src/Config/HeaderConfig.php:105
+#: src/Services/Admin/Dashboard/DashboardManager.php:56
+#: templates/admin/pages/dashboard/header.php:24
+msgid "Dashboard"
+msgstr ""
+
+#: src/Config/HeaderConfig.php:111
+#: src/Services/Admin/ProductForecast/ProductForecastManager.php:45
+#: templates/admin/pages/product-forecast/header.php:23
+msgid "Product Forecast"
+msgstr ""
+
+#: src/Config/HeaderConfig.php:117
+#: src/Services/Admin/Settings/SettingsManager.php:40
+#: templates/admin/pages/settings/header.php:24
+msgid "Settings"
+msgstr ""
+
+#: src/Cron/CronManager.php:97
+msgid "Every Minute"
+msgstr ""
+
+#: src/Cron/CronManager.php:101
+msgid "Every 5 Minutes"
+msgstr ""
+
+#: src/Cron/CronManager.php:105
+msgid "Every 15 Minutes"
+msgstr ""
+
+#: src/Cron/CronManager.php:109
+msgid "Every 30 Minutes"
+msgstr ""
+
+#: src/Cron/CronManager.php:113
+msgid "Once Weekly"
+msgstr ""
+
+#: src/Cron/CronManager.php:117
+msgid "Once Monthly"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:49
+msgid "Products Analyzed"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:50
+msgid "Included in forecast model"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:58
+msgid "No restock needed"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:66
+msgid "At risk of shortage"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:74
+msgid "Restock immediately"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:82
+msgid "Unavailable for sale"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:90
+msgid "Sold without stock"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:125
+msgid "No Products in Critical Stock"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:126
+msgid ""
+"None of your products are currently predicted to reach critical stock "
+"levels."
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:189
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:159
+#: templates/admin/components/filter-sidebar.php:99
+msgid "Product"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:195
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:171
+msgid "Available Stock"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:204
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:183
+msgid " / day"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:209
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:191
+msgid "Estimated Days Remaining"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardData.php:215
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:201
+#: templates/admin/components/filter-sidebar.php:57
+msgid "Stockout Risk"
+msgstr ""
+
+#: src/Services/Admin/Dashboard/DashboardManager.php:48
+msgid "Stock Forecast"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:84
+msgid "No results found"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:85
+msgid "No Products Available"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:87
+msgid "Try adjusting your search or filters to find what you are looking for."
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:88
+msgid "There are no products available to generate stock forecasts yet."
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:144
+msgid "N/A"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:165
+msgid "SKU"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:175
+msgid "Backorder"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:186
+msgid "No sales"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:195
+msgid "Out of stock"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:196
+msgid "days"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastData.php:207
+msgid "Last Calculated"
+msgstr ""
+
+#: src/Services/Admin/ProductForecast/ProductForecastManager.php:66
+msgid "Forecast refresh queued"
+msgstr ""
+
+#: src/Services/Admin/Settings/SettingsSaveHandler.php:36
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: src/Services/Admin/Settings/SettingsSaveHandler.php:58
+#, php-format
+msgid ""
+"Please go to the <a href=\"%s\"><strong>Product Forecast</strong></a> page "
+"and click <strong>Refresh Forecasts</strong> once to regenerate forecasts "
+"using the new settings."
+msgstr ""
+
+#: src/Services/Admin/Settings/SettingsSaveHandler.php:66
+msgid "Your changes have been saved"
+msgstr ""
+
+#: src/Services/Admin/Settings/SettingsSaver.php:36
+msgid "Security check failed. Please refresh the page and try again."
+msgstr ""
+
+#: src/Utils/DisplayUtils.php:33
+msgid "Updating forecasts..."
+msgstr ""
+
+#. translators: %s: Time difference since the last update.
+#: src/Utils/DisplayUtils.php:39
+#, php-format
+msgid "Last updated %s"
+msgstr ""
+
+#: src/Utils/DisplayUtils.php:53
+msgid "Critical"
+msgstr ""
+
+#: src/Utils/DisplayUtils.php:59
+msgid "Warning"
+msgstr ""
+
+#: src/Utils/DisplayUtils.php:65
+msgid "Safe"
+msgstr ""
+
+#: src/Utils/DisplayUtils.php:77
+msgid "Backordering"
+msgstr ""
+
+#: src/Utils/DisplayUtils.php:131 src/Utils/DisplayUtils.php:137
+msgid "Never"
+msgstr ""
+
+#. translators: %s: Time difference.
+#: src/Utils/DisplayUtils.php:143
+#, php-format
+msgid "%s ago"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:20
+msgid "Forecast filters"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:26
+#: templates/admin/pages/product-forecast/content.php:44
+#: templates/admin/pages/product-forecast/content.php:48
+msgid "Advanced Filters"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:32
+msgid "Close filters"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:52
+msgid "Stock Risk"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:65
+msgid "All Levels"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:76
+msgid "Stockout Within (Days)"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:84
+#: templates/admin/components/filter-sidebar.php:137
+#: templates/admin/components/filter-sidebar.php:156
+msgid "Any"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:112
+msgid "All Types"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:124
+msgid "Inventory & Sales"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:178
+msgid "Reset"
+msgstr ""
+
+#: templates/admin/components/filter-sidebar.php:185
+msgid "Apply Filters"
+msgstr ""
+
+#: templates/admin/components/notices/simple-notice.php:59
+msgid "Close"
+msgstr ""
+
+#: templates/admin/components/pagination.php:48
+msgid "items"
+msgstr ""
+
+#: templates/admin/components/pagination.php:82
+msgid "of"
+msgstr ""
+
+#: templates/admin/layouts/header.php:84
+msgid "Toggle navigation"
+msgstr ""
+
+#: templates/admin/pages/dashboard/content.php:25
+msgid "Inventory Health Overview"
+msgstr ""
+
+#: templates/admin/pages/dashboard/content.php:26
+msgid "Key metrics showing the current state of your product inventory."
+msgstr ""
+
+#: templates/admin/pages/dashboard/content.php:49
+msgid "Critical Products"
+msgstr ""
+
+#: templates/admin/pages/dashboard/content.php:50
+msgid ""
+"Products at highest risk of stockout based on current inventory and sales "
+"velocity."
+msgstr ""
+
+#: templates/admin/pages/dashboard/header.php:27
+msgid "Overview of predicted stock levels and potential stock shortages."
+msgstr ""
+
+#: templates/admin/pages/dashboard/header.php:33
+msgid "Go to the forecast page to run full recalculation manually"
+msgstr ""
+
+#: templates/admin/pages/dashboard/header.php:33
+msgid "View forecasts →"
+msgstr ""
+
+#: templates/admin/pages/product-forecast/content.php:35
+msgid "Product name or SKU…"
+msgstr ""
+
+#: templates/admin/pages/product-forecast/content.php:117
+msgid "Rows per page:"
+msgstr ""
+
+#: templates/admin/pages/product-forecast/header.php:26
+msgid "View stock forecasts for each product based on past sales."
+msgstr ""
+
+#: templates/admin/pages/product-forecast/header.php:40
+msgid ""
+"Manual forecast recalculation for all products, runs in the background."
+msgstr ""
+
+#: templates/admin/pages/settings/content.php:52
+msgid "Save Changes"
+msgstr ""
+
+#: templates/admin/pages/settings/header.php:27
+msgid "Configure how stock forecasts are calculated based on past sales data."
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:23
+msgid "Stock Forecast Settings"
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:26
+msgid ""
+"Configure how sales data is analyzed to estimate future demand and identify "
+"products that may run out of stock."
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:37
+msgid "Sales History Period (Days)"
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:45
+msgid "e.g. 30"
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:52
+msgid ""
+"Number of past days used to calculate the average daily sales for "
+"forecasting."
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:60
+msgid "Processing Batch Size"
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:68
+msgid "e.g. 50"
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:75
+msgid "Number of products processed per batch when generating forecasts."
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:83
+msgid "Low Stock Warning Threshold (Days)"
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:91
+msgid "e.g. 14"
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:98
+msgid ""
+"Show a warning when the estimated stock will last fewer than this number of "
+"days."
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:106
+msgid "Critical Stock Threshold (Days)"
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:114
+msgid "e.g. 7"
+msgstr ""
+
+#: templates/admin/pages/settings/sections/forecast.php:121
+msgid ""
+"Mark products as critical when the estimated stock coverage falls below "
+"this level."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid ""
+"https://github.com/stock-forecast-for-woocommerce/stock-forecast-for-"
+"woocommerce"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Forecast WooCommerce product stock using sales history to predict inventory "
+"needs, prevent stockouts, and make smarter restocking decisions."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Mohammad Yari"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/stock-forecast-for-woocommerce"
+msgstr ""

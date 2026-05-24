@@ -1,0 +1,36 @@
+// =====================================================
+// Admin UI - Section Layout (Scoped)
+// =====================================================
+// Page section containers with titles.
+// Entirely scoped within .#{css-class('wrap')} to ensure
+// full isolation from WordPress admin styles.
+// =====================================================
+
+@use "../prefix" as *;
+
+.#{css-class('wrap')} {
+
+  // Section container
+  .#{css-class('section')} {
+    margin-bottom: 1.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .#{css-class('section__title')} {
+    margin: 0 0 1rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: css-var(heading-color);
+  }
+
+  .#{css-class('section__description')} {
+    margin: -0.5rem 0 1rem 0;
+    font-size: 0.875rem;
+    color: css-var(muted-color);
+  }
+
+}
