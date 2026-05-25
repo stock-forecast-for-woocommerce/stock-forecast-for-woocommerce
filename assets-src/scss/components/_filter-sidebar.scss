@@ -164,6 +164,11 @@
         background: css-var(gray-400);
         border-radius: css-var(border-radius-pill);
       }
+
+      .#{css-class('form-select')},
+      .#{css-class('form-control')} {
+        max-width: 100%;
+      }
     }
 
     // -------------------------------------------------
