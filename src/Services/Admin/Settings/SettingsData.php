@@ -48,7 +48,7 @@ class SettingsData
          * @param array $sections
          */
         return apply_filters(
-            'stock_forecast_settings_sections',
+            'stock_forecast_for_woocommerce_settings_sections',
             $sections
         );
     }
