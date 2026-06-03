@@ -8,7 +8,7 @@ Stable tag: 1.0.0
 License: GPL-2.0-or-later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Predicts when WooCommerce products will run out of stock using sales velocity. Real-time forecasts, color-coded risk levels, and variable product support.
+Predicts when products will run out of stock using sales velocity. Real-time forecasts, color-coded risk levels, and variable product support.
 
 == Description ==
 
