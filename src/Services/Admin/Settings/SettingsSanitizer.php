@@ -25,13 +25,24 @@ class SettingsSanitizer
      * @param array $data
      * @return array
      */
-    public static function forecast(array $data): array
+    public function forecast(array $data): array
     {
         return Sanitize::map($data, [
-            PluginSettings::SALES_WINDOW_DAYS => 'absint',
-            PluginSettings::BATCH_SIZE        => 'absint',
-            PluginSettings::WARNING_DAYS      => 'absint',
-            PluginSettings::CRITICAL_DAYS     => 'absint',
+            PluginSettings::SALES_WINDOW_DAYS => 'int',
+            PluginSettings::BATCH_SIZE        => 'int',
+            PluginSettings::WARNING_DAYS      => 'int',
+            PluginSettings::CRITICAL_DAYS     => 'int',
         ]);
+    }
+
+    /**
+     * Sanitize all sections at once.
+     *
+     * @param array $data
+     * @return array
+     */
+    public function all(array $data): array
+    {
+        return $this->forecast($data);
     }
 }

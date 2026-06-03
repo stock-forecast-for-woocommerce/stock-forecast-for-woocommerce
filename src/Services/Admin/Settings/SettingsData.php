@@ -2,6 +2,7 @@
 
 namespace StockForecastForWooCommerce\Services\Admin\Settings;
 
+use StockForecastForWooCommerce\Config\PrefixConfig;
 use StockForecastForWooCommerce\Utils\OptionUtils;
 use StockForecastForWooCommerce\Config\PluginSettings;
 
@@ -39,6 +40,8 @@ class SettingsData
         $sections = [
             PluginSettings::SECTION_FORECAST => [
                 'template' => 'admin/pages/settings/sections/forecast',
+                'title'    => __('Forecasting', 'stock-forecast-for-woocommerce'),
+                'icon'     => PrefixConfig::css('icon--chart-line'),
             ]
         ];
 

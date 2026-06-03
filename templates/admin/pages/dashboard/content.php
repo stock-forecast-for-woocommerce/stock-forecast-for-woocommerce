@@ -3,6 +3,10 @@
 /**
  * Template part: Dashboard page content.
  *
+ * All output is captured by TemplateUtils::renderTemplate() and
+ * escaped late via wp_kses() in AbstractAdminPage::render().
+ *
+ * phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
  * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template variables are locally scoped via include.
  *
  * @package StockForecastForWooCommerce
@@ -28,7 +32,6 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
             <?php foreach ($stats as $stat) : ?>
                 <div class="sffw-col-12 sffw-col-sm-6 sffw-col-md-4 sffw-col-lg-3 sffw-col-xxl-2">
                     <?php
-                    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Output escaped in template
                     echo TemplateUtils::renderTemplate('admin/components/stat-card', [
                         'icon'     => $stat['icon'],
                         'label'    => $stat['label'],
@@ -37,7 +40,6 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
                         'color'    => $stat['color'],
                         'link'     => $stat['link'],
                     ]);
-                    // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
                     ?>
                 </div>
             <?php endforeach; ?>
@@ -52,26 +54,22 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
             <div class="sffw-card sffw-table-card ">
                 <div class="sffw-table-responsive">
                     <?php
-                    // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Output escaped in template
                     echo TemplateUtils::renderTemplate('admin/components/table', [
                         'columns' => $criticalProductsData['columns'],
                         'rows'    => $criticalProductsData['rows'],
                         'class'   => $criticalProductsData['class'],
                     ]);
-                    // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
                     ?>
                 </div>
             </div>
         <?php else: ?>
             <?php
-            // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Output escaped in template
             echo TemplateUtils::renderTemplate('admin/components/message-card', [
                 'title' => $criticalProductsData['title'],
                 'text'  => $criticalProductsData['text'],
                 'icon'  => $criticalProductsData['icon'],
                 'color' => $criticalProductsData['color'],
             ]);
-            // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
             ?>
         <?php endif; ?>
     </div>

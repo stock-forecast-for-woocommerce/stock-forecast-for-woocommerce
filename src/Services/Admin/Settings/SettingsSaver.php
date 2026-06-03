@@ -22,6 +22,19 @@ if (!defined('ABSPATH')) {
 class SettingsSaver
 {
     /**
+     * @var SettingsSanitizer
+     */
+    private SettingsSanitizer $sanitizer;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->sanitizer = new SettingsSanitizer();
+    }
+
+    /**
      * Save plugin settings after validating security and sanitizing input.
      *
      * @param array $input
@@ -54,7 +67,7 @@ class SettingsSaver
      */
     private function saveForecast(array &$settings, array $data): void
     {
-        $clean = SettingsSanitizer::forecast($data);
+        $clean = $this->sanitizer->forecast($data);
 
         foreach ($clean as $key => $value) {
             $fullKey = OptionUtils::makeKey(PluginSettings::SECTION_FORECAST, $key);

@@ -90,6 +90,7 @@ class ComposerStaticInitStockForecastForWooCommerce
         'StockForecastForWooCommerce\\Sources\\WooCommerceSource' => __DIR__ . '/../..' . '/src/Sources/WooCommerceSource.php',
         'StockForecastForWooCommerce\\Utils\\DateTimeUtils' => __DIR__ . '/../..' . '/src/Utils/DateTimeUtils.php',
         'StockForecastForWooCommerce\\Utils\\DisplayUtils' => __DIR__ . '/../..' . '/src/Utils/DisplayUtils.php',
+        'StockForecastForWooCommerce\\Utils\\Kses' => __DIR__ . '/../..' . '/src/Utils/Kses.php',
         'StockForecastForWooCommerce\\Utils\\Logger' => __DIR__ . '/../..' . '/src/Utils/Logger.php',
         'StockForecastForWooCommerce\\Utils\\MenuUtils' => __DIR__ . '/../..' . '/src/Utils/MenuUtils.php',
         'StockForecastForWooCommerce\\Utils\\OptionUtils' => __DIR__ . '/../..' . '/src/Utils/OptionUtils.php',

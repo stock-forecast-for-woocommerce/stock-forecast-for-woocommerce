@@ -75,6 +75,7 @@ return array(
     'StockForecastForWooCommerce\\Sources\\WooCommerceSource' => $baseDir . '/src/Sources/WooCommerceSource.php',
     'StockForecastForWooCommerce\\Utils\\DateTimeUtils' => $baseDir . '/src/Utils/DateTimeUtils.php',
     'StockForecastForWooCommerce\\Utils\\DisplayUtils' => $baseDir . '/src/Utils/DisplayUtils.php',
+    'StockForecastForWooCommerce\\Utils\\Kses' => $baseDir . '/src/Utils/Kses.php',
     'StockForecastForWooCommerce\\Utils\\Logger' => $baseDir . '/src/Utils/Logger.php',
     'StockForecastForWooCommerce\\Utils\\MenuUtils' => $baseDir . '/src/Utils/MenuUtils.php',
     'StockForecastForWooCommerce\\Utils\\OptionUtils' => $baseDir . '/src/Utils/OptionUtils.php',

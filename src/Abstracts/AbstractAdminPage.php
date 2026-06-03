@@ -4,6 +4,7 @@ namespace StockForecastForWooCommerce\Abstracts;
 
 use StockForecastForWooCommerce\Admin\Notices\AdminNotices;
 use StockForecastForWooCommerce\Config\HeaderConfig;
+use StockForecastForWooCommerce\Utils\Kses;
 use StockForecastForWooCommerce\Utils\TemplateUtils;
 
 if (!defined('ABSPATH')) {
@@ -88,8 +89,7 @@ abstract class AbstractAdminPage extends AbstractSingleton
             $output .= $section;
         }
 
-        // All sections return escaped HTML from renderTemplate()
-        echo $output; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo wp_kses($output, Kses::allowedHtml());
     }
 
     /**
