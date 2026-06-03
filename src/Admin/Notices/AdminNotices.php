@@ -6,6 +6,7 @@ use StockForecastForWooCommerce\Cache\CacheKeys;
 use StockForecastForWooCommerce\Cache\CacheManager;
 use StockForecastForWooCommerce\Components\AjaxComponent;
 use StockForecastForWooCommerce\Config\UserOptions;
+use StockForecastForWooCommerce\Utils\Kses;
 use StockForecastForWooCommerce\Utils\OptionUtils;
 use StockForecastForWooCommerce\Utils\PluginUtils;
 
@@ -189,9 +190,7 @@ class AdminNotices
     public static function render(): void
     {
         foreach (self::$notices as $notice) {
-            // render() returns already escaped HTML.
-            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo $notice->render();
+            echo wp_kses($notice->render(), Kses::allowedHtml());
         }
 
         self::clearNonPersistent();

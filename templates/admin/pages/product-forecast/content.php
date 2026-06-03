@@ -3,6 +3,10 @@
 /**
  * Template part: Product Forecast page content.
  *
+ * All output is captured by TemplateUtils::renderTemplate() and
+ * escaped late via wp_kses() in AbstractAdminPage::render().
+ *
+ * phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
  * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template variables are locally scoped via include.
  *
  * @package StockForecastForWooCommerce
@@ -58,7 +62,6 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
                     <!-- Pagination -->
                     <?php if ($forecastsData['pagination']['pages'] > 1): ?>
                         <?php
-                        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Output escaped in template
                         echo TemplateUtils::renderTemplate(
                             'admin/components/pagination',
                             [
@@ -68,7 +71,6 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
                                 'pages'   => $forecastsData['pagination']['pages'],
                             ]
                         );
-                        // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
                         ?>
                     <?php endif; ?>
                 </div>
@@ -81,7 +83,6 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
                 <div class="sffw-card sffw-table-card ">
                     <div class="sffw-table-responsive">
                         <?php
-                        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Output escaped in template
                         echo TemplateUtils::renderTemplate(
                             'admin/components/table',
                             [
@@ -89,13 +90,11 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
                                 'rows'    => $forecastsData['rows'],
                                 'class'   => $forecastsData['class'],
                             ]);
-                        // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
                         ?>
                     </div>
                 </div>
             <?php else: ?>
                 <?php
-                // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped -- Output escaped in template
                 echo TemplateUtils::renderTemplate(
                     'admin/components/message-card',
                     [
@@ -104,7 +103,6 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
                         'icon'  => $forecastsData['icon'],
                         'color' => $forecastsData['color'],
                     ]);
-                // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
                 ?>
             <?php endif; ?>
 
@@ -134,7 +132,6 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
                     <!-- Pagination -->
                     <?php if ($forecastsData['pagination']['pages'] > 1): ?>
                         <?php
-                        // phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
                         echo TemplateUtils::renderTemplate(
                             'admin/components/pagination',
                             [
@@ -144,7 +141,6 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
                                 'pages'   => $forecastsData['pagination']['pages'],
                             ]
                         );
-                        // phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
                         ?>
                     <?php endif; ?>
                 </div>
@@ -153,10 +149,8 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
     </div>
 
 <?php
-// phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
 echo TemplateUtils::renderTemplate(
     'admin/components/filter-sidebar',
     []
 );
-// phpcs:enable WordPress.Security.EscapeOutput.OutputNotEscaped
 ?>

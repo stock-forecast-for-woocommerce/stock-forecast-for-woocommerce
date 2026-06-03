@@ -68,6 +68,7 @@ const paths = {
             'assets-src/scripts/components/theme-switcher.js',
             'assets-src/scripts/components/admin-notices.js',
             'assets-src/scripts/components/header.js',
+            'assets-src/scripts/components/settings-tabs.js',
             'assets-src/scripts/components/pagination.js',
             'assets-src/scripts/components/product-filters.js',
             'assets-src/scripts/components/filter-sidebar.js',

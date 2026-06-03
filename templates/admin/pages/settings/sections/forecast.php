@@ -9,18 +9,19 @@
  * @version 1.0.0
  *
  * @var array $settings
+ * @var string $sectionId
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 ?>
-<div class="sffw-settings__section">
+<div id="sffw-section-<?php echo esc_attr($sectionId); ?>" class="sffw-settings__section">
     <div class="sffw-card">
         <div class="sffw-card-header">
             <div class="sffw-card-header-content">
                 <h5 class="sffw-card-title">
-                    <?php esc_html_e('Stock Forecast Settings', 'stock-forecast-for-woocommerce'); ?>
+                    <?php esc_html_e('Forecast Configuration', 'stock-forecast-for-woocommerce'); ?>
                 </h5>
                 <p class="sffw-card-subtitle">
                     <?php esc_html_e('Configure how sales data is analyzed to estimate future demand and identify products that may run out of stock.', 'stock-forecast-for-woocommerce'); ?>
