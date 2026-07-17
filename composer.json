@@ -1,6 +1,6 @@
 {
   "name": "mohammadyari/stock-forecast-for-woocommerce",
-  "description": "A WooCommerce plugin that forecasts product inventory needs based on sales history to predict demand and prevent stockouts.",
+  "description": "A high-quality WordPress plugin.",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "authors": [

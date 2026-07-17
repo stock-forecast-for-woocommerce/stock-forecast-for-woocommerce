@@ -1,84 +1,30 @@
 # Security Policy
 
-
-
-The security of Stock Forecast for WooCommerce is a top priority.
-
-
-
-If you discover a security vulnerability, please report it responsibly and do not open a public issue.
-
-
-
 ## Reporting a Vulnerability
 
-
-
-To report a security issue, please contact us via email:
-
-
+Do not open public issues. Email us at:
 
 stockforecast.security@proton.me
 
+Include: description, steps to reproduce, affected versions, and any relevant code/screenshots (remove sensitive data like credentials or paths).
 
-
-Please include as much information as possible:
-
-
-
-- Description of the vulnerability
-
-- Steps to reproduce
-
-- Affected versions (if known)
-
-- Any relevant screenshots or code snippets
-
-
-
-We aim to respond within 72 hours.
-
-
+We respond within 72 hours.
 
 ## Supported Versions
 
-
-
-Only the latest released version of the plugin is actively supported with security updates.
-
-
+Only the latest major version receives security updates.
 
 ## Responsible Disclosure
 
-
-
-We kindly ask that you give us a reasonable amount of time to investigate and fix the issue before disclosing it publicly.
-
-
+Allow reasonable time to fix the issue before public disclosure.
 
 ## Data Privacy
 
-
-
-This plugin stores forecast data locally within your WordPress database using an optimized custom table.
-
-
-
-Stored data includes:
+This plugin stores locally:
 
 - Product ID and variation ID
-
 - Days Until Stockout forecast
-
 - Risk level (Safe, Low, Critical)
-
 - Last calculation timestamp
 
-
-
-All data remains on your server. No data is sent externally. No external APIs are used.
-
-
-
-Thank you for helping keep Stock Forecast for WooCommerce secure.
-
+All data stays on your server. No external APIs or data sharing.

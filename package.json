@@ -1,7 +1,7 @@
 {
   "name": "@mohammadyari/stock-forecast-for-woocommerce",
   "version": "1.0.0",
-  "description": "Frontend build pipeline for the Stock Forecast for WooCommerce plugin using Gulp and Sass.",
+  "description": "Frontend build pipeline for WordPress plugins using Gulp and Sass.",
   "type": "module",
   "scripts": {
     "build": "gulp",

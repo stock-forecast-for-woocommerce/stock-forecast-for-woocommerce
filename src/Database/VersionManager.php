@@ -28,7 +28,7 @@ class VersionManager
     /** Get the current database schema version. */
     public static function getVersion(): string
     {
-        return PROACTIVE_SITE_ADVISOR_DB_VERSION;
+        return STOCK_FORECAST_FOR_WOOCOMMERCE_ASSETS;
     }
 
     /** Get the installed database version. */
