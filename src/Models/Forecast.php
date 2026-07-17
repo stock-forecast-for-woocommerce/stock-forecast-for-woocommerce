@@ -3,7 +3,7 @@
 namespace StockForecastForWooCommerce\Models;
 
 use StockForecastForWooCommerce\Abstracts\AbstractModel;
-use StockForecastForWooCommerce\Database\DatabaseManager;
+use StockForecastForWooCommerce\Database\QueryRunner;
 use StockForecastForWooCommerce\Utils\DateTimeUtils;
 
 if (!defined('ABSPATH')) {
@@ -11,23 +11,17 @@ if (!defined('ABSPATH')) {
 }
 
 /**
+ * Represents a forecast record.
+ *
  * @package StockForecastForWooCommerce\Models
- * @version 1.0.0
+ * @since   1.0.0
  */
 class Forecast extends AbstractModel
 {
-    /**
-     * Table name (without prefix)
-     *
-     * @var string
-     */
+    /** Table name (without prefix). */
     protected static string $table = 'forecasts';
 
-    /**
-     * Fillable fields (allowed for mass assignment)
-     *
-     * @var array
-     */
+    /** Fillable fields. */
     protected static array $fillable = [
         'product_id',
         'variation_id',
@@ -40,12 +34,7 @@ class Forecast extends AbstractModel
         'last_calculated',
     ];
 
-    /**
-     * Bulk Upsert (Insert or Update on Duplicate Key)
-     *
-     * @param array $data Array of forecast data arrays.
-     * @return int|bool Number of affected rows or false.
-     */
+    /** Insert or update multiple forecast records. */
     public static function upsertMany(array $data)
     {
         if (empty($data)) {
@@ -89,7 +78,7 @@ class Forecast extends AbstractModel
             $sku         = $prepareNullableString($row['sku'] ?? null);
             $productType = $prepareNullableString($row['product_type'] ?? null);
 
-            if (!isset($row['current_stock']) || is_null($row['current_stock'])) {
+            if (!isset($row['current_stock'])) {
                 $currentStock = 'NULL';
             } else {
                 $currentStock = (int)$row['current_stock'];
@@ -128,15 +117,10 @@ class Forecast extends AbstractModel
             updated_at = VALUES(updated_at)
     ";
 
-        return DatabaseManager::query($sql);
+        return QueryRunner::query($sql);
     }
 
-    /**
-     * Bulk Delete (Delete multiple records based on product_id and variation_id pairs).
-     *
-     * @param array $entities An array of associative arrays, each containing 'product_id' and 'variation_id'.
-     * @return int|bool Number of affected rows or false on failure.
-     */
+    /** Delete multiple forecast records. */
     public static function deleteMany(array $entities)
     {
         if (empty($entities)) {
@@ -173,21 +157,10 @@ class Forecast extends AbstractModel
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
         $sql = $wpdb->prepare("DELETE FROM $table WHERE $whereSql", ...$params);
 
-        return DatabaseManager::query($sql);
+        return QueryRunner::query($sql);
     }
 
-    /**
-     * Delete all forecast records related to a product.
-     *
-     * This method removes forecasts for:
-     * - the main product (variation_id = 0)
-     * - all its variations
-     *
-     * Intended for use in product deletion hooks.
-     *
-     * @param int $productId WooCommerce product ID.
-     * @return int|false Number of affected rows or false on failure.
-     */
+    /** Delete all forecast records for a product. */
     public static function deleteByProductId(int $productId)
     {
         if ($productId <= 0) {
@@ -202,17 +175,10 @@ class Forecast extends AbstractModel
         }
 
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
-        return DatabaseManager::query($wpdb->prepare("DELETE FROM $table WHERE product_id = %d", $productId));
+        return QueryRunner::query($wpdb->prepare("DELETE FROM $table WHERE product_id = %d", $productId));
     }
 
-    /**
-     * Delete a forecast record for a specific product variation.
-     *
-     * Intended for use in variation deletion hooks.
-     *
-     * @param int $variationId WooCommerce variation ID.
-     * @return int|false Number of affected rows or false on failure.
-     */
+    /** Delete a forecast record for a variation. */
     public static function deleteByVariationId(int $variationId)
     {
         if ($variationId <= 0) {
@@ -227,6 +193,6 @@ class Forecast extends AbstractModel
         }
 
         // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
-        return DatabaseManager::query($wpdb->prepare("DELETE FROM $table WHERE variation_id = %d", $variationId));
+        return QueryRunner::query($wpdb->prepare("DELETE FROM $table WHERE variation_id = %d", $variationId));
     }
 }

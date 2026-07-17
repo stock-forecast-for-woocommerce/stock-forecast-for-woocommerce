@@ -9,25 +9,17 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class ProductForecastPage
- *
- * Admin page displaying product stock forecasts.
+ * Displays the Product Forecast admin page.
  *
  * @package StockForecastForWooCommerce\Services\Admin\ProductForecast
- * @version 1.0.0
+ * @since   1.0.0
  */
 class ProductForecastPage extends AbstractAdminPage
 {
-    /**
-     * Holds ProductForecastData instance for data access.
-     *
-     * @var ProductForecastData
-     */
+    /** Product forecast data service. */
     protected ProductForecastData $productForecastData;
 
-    /**
-     * ProductForecastPage constructor.
-     */
+    /** Initializes the product forecast page. */
     protected function __construct()
     {
         parent::__construct();
@@ -35,31 +27,19 @@ class ProductForecastPage extends AbstractAdminPage
         $this->productForecastData = new ProductForecastData();
     }
 
-    /**
-     * Get page header template path.
-     *
-     * @return string
-     */
+    /** Gets the page header template. */
     protected function getPageHeaderTemplate(): string
     {
         return 'admin/pages/product-forecast/header';
     }
 
-    /**
-     * Get the template path.
-     *
-     * @return string
-     */
+    /** Gets the page template. */
     protected function getTemplate(): string
     {
         return 'admin/pages/product-forecast/content';
     }
 
-    /**
-     * Get page header template context.
-     *
-     * @return array
-     */
+    /** Gets the page header context. */
     protected function getPageHeaderContext(): array
     {
         return [
@@ -67,11 +47,7 @@ class ProductForecastPage extends AbstractAdminPage
         ];
     }
 
-    /**
-     * Provide template data.
-     *
-     * @return array
-     */
+    /** Gets the page body context. */
     protected function getBodyContext(): array
     {
         return [

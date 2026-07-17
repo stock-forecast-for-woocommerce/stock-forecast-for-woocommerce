@@ -13,27 +13,17 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class SingleProductForecastJob
+ * Processes a single product forecast.
  *
  * @package StockForecastForWooCommerce\Services\Forecast\Jobs
- * @version 1.0.0
+ * @since   1.0.0
  */
 class SingleProductForecastJob extends AbstractJob
 {
-
-    /**
-     * Job name.
-     *
-     * @var string
-     */
+    /** Job name. */
     protected string $job = 'forecast_single_product';
 
-    /**
-     * Handle job logic.
-     *
-     * @param array $payload
-     * @return void
-     */
+    /** Handle the queued job. */
     public function handle(array $payload): void
     {
         $productId = (int)($payload['product_id'] ?? 0);
@@ -45,7 +35,10 @@ class SingleProductForecastJob extends AbstractJob
         $forecastEngine = new ForecastEngine();
         $forecastEngine->processProduct($productId);
 
-        // Update the timestamp of the last forecast update.
-        OptionUtils::setMeta(PluginMeta::FORECAST_LAST_UPDATED, DateTimeUtils::timestamp(), false);
+        OptionUtils::setMeta(
+            PluginMeta::FORECAST_LAST_UPDATED,
+            DateTimeUtils::timestamp(),
+            false
+        );
     }
 }

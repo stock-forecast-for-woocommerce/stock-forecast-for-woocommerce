@@ -12,34 +12,23 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class SettingsSaver
- *
- * Handles saving of plugin settings from the admin panel.
+ * Saves plugin settings.
  *
  * @package StockForecastForWooCommerce\Services\Admin\Settings
- * @version 1.0.0
+ * @since   1.0.0
  */
 class SettingsSaver
 {
-    /**
-     * @var SettingsSanitizer
-     */
+    /** Settings sanitizer instance. */
     private SettingsSanitizer $sanitizer;
 
-    /**
-     * Constructor.
-     */
+    /** Initializes the settings saver. */
     public function __construct()
     {
         $this->sanitizer = new SettingsSanitizer();
     }
 
-    /**
-     * Save plugin settings after validating security and sanitizing input.
-     *
-     * @param array $input
-     * @return void
-     */
+    /** Saves plugin settings. */
     public function save(array $input): void
     {
         $nonceAction = PrefixConfig::nonce('settings');
@@ -58,13 +47,7 @@ class SettingsSaver
         OptionUtils::updateAll($settings);
     }
 
-    /**
-     * Process and store forecast section settings.
-     *
-     * @param array $settings
-     * @param array $data
-     * @return void
-     */
+    /** Saves forecast section settings. */
     private function saveForecast(array &$settings, array $data): void
     {
         $clean = $this->sanitizer->forecast($data);

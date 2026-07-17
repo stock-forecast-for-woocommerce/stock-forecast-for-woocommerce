@@ -9,8 +9,8 @@
  * phpcs:disable WordPress.Security.EscapeOutput.OutputNotEscaped
  * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template variables are locally scoped via include.
  *
- * @package StockForecastForWooCommerce
- * @version 1.0.0
+ * @package StockForecastForWooCommerce\Templates\Admin\Pages\Settings
+ * @since   1.0.0
  *
  * @var array $sections
  * @var array $settings
@@ -35,17 +35,17 @@ use StockForecastForWooCommerce\Utils\TemplateUtils;
                 <?php foreach ($sections as $sectionId => $section) : ?>
                     <button
                         type="button"
-                        class="sffw-nav-item"
+                        class="sffw-settings-sidebar-nav-item"
                         data-sffw-section="<?php echo esc_attr($sectionId); ?>"
                     >
-                        <span class="sffw-nav-item__icon <?php echo esc_attr($section['icon']); ?>"></span>
-                        <span class="sffw-nav-item__text"><?php echo esc_html($section['title']); ?></span>
+                        <span class="sffw-settings-sidebar-nav-item__icon <?php echo esc_attr($section['icon']); ?>"></span>
+                        <span class="sffw-settings-sidebar-nav-item__text"><?php echo esc_html($section['title']); ?></span>
                     </button>
                 <?php endforeach; ?>
             </div>
         </div>
 
-        <div class="sffw-section">
+        <div class="sffw-section sffw-section-flex">
             <div class="sffw-settings">
                 <form method="post" action="<?php echo esc_url($formAction); ?>" class="sffw-settings-form">
                     <?php

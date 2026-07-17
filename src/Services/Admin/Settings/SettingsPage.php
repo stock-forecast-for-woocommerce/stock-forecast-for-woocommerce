@@ -10,40 +10,26 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class SettingsPage
- *
- * Admin settings page for the plugin.
+ * Displays the plugin settings page.
  *
  * @package StockForecastForWooCommerce\Services\Admin\Settings
- * @version 1.0.0
+ * @since   1.0.0
  */
 class SettingsPage extends AbstractAdminPage
 {
-    /**
-     * Get page header template path.
-     *
-     * @return string
-     */
+    /** Gets the page header template. */
     protected function getPageHeaderTemplate(): string
     {
         return 'admin/pages/settings/header';
     }
 
-    /**
-     * Get the template path.
-     *
-     * @return string
-     */
+    /** Gets the page template. */
     protected function getTemplate(): string
     {
         return 'admin/pages/settings/content';
     }
 
-    /**
-     * Provide template data.
-     *
-     * @return array
-     */
+    /** Gets the page body context. */
     protected function getBodyContext(): array
     {
         $settingsData = new SettingsData();

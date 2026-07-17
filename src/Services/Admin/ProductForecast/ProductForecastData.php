@@ -14,31 +14,23 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class ProductForecastData
+ * Provides product forecast data for the admin interface.
  *
  * @package StockForecastForWooCommerce\Services\Admin\ProductForecast
- * @version 1.0.0
+ * @since   1.0.0
  */
 class ProductForecastData
 {
-    /**
-     * @var ForecastDataProvider
-     */
+    /** Forecast data provider. */
     private ForecastDataProvider $forecastDataProvider;
 
-    /**
-     * Constructor.
-     */
+    /** Initializes the product forecast data service. */
     public function __construct()
     {
         $this->forecastDataProvider = new ForecastDataProvider();
     }
 
-    /**
-     * Returns a formatted string showing when the forecast was last updated.
-     *
-     * @return string
-     */
+    /** Gets the forecast last updated display string. */
     public function getForecastLastUpdatedDisplay(): string
     {
         $forecastLastUpdated = (int)OptionUtils::getMeta(PluginMeta::FORECAST_LAST_UPDATED);
@@ -46,11 +38,7 @@ class ProductForecastData
         return DisplayUtils::getForecastLastUpdatedDisplay($forecastLastUpdated);
     }
 
-    /**
-     * Returns forecast data.
-     *
-     * @return array
-     */
+    /** Gets forecast data. */
     public function getForecastsData(): array
     {
         $page    = Request::int('paged', 1);
@@ -98,12 +86,10 @@ class ProductForecastData
             ];
         }
 
-        // collect product ids
         $productIds = array_map(static function ($forecast) {
             return (int)($forecast->variation_id ?: $forecast->product_id);
         }, $forecasts['items']);
 
-        // preload products
         $products = wc_get_products(
             [
                 'include' => $productIds,
@@ -115,7 +101,6 @@ class ProductForecastData
             ]
         );
 
-        // map products by id
         $productMap = [];
         foreach ($products as $product) {
             $productMap[$product->get_id()] = $product;

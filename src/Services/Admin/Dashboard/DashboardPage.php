@@ -10,25 +10,17 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class DashboardPage
- *
- * Admin dashboard page for the plugin.
+ * Displays the plugin dashboard page.
  *
  * @package StockForecastForWooCommerce\Services\Admin\Dashboard
- * @version 1.0.0
+ * @since   1.0.0
  */
 class DashboardPage extends AbstractAdminPage
 {
-    /**
-     * Holds DashboardData instance for data access.
-     *
-     * @var DashboardData
-     */
+    /** Dashboard data provider. */
     protected DashboardData $dashboardData;
 
-    /**
-     * ProductForecastPage constructor.
-     */
+    /** Initialize the dashboard page. */
     protected function __construct()
     {
         parent::__construct();
@@ -36,31 +28,19 @@ class DashboardPage extends AbstractAdminPage
         $this->dashboardData = new DashboardData();
     }
 
-    /**
-     * Get page header template path.
-     *
-     * @return string
-     */
+    /** Get the page header template. */
     protected function getPageHeaderTemplate(): string
     {
         return 'admin/pages/dashboard/header';
     }
 
-    /**
-     * Get the template path.
-     *
-     * @return string
-     */
+    /** Get the page body template. */
     protected function getTemplate(): string
     {
         return 'admin/pages/dashboard/content';
     }
 
-    /**
-     * Get page header template context.
-     *
-     * @return array
-     */
+    /** Get the page header context. */
     protected function getPageHeaderContext(): array
     {
         return [
@@ -69,11 +49,7 @@ class DashboardPage extends AbstractAdminPage
         ];
     }
 
-    /**
-     * Provide data for the template.
-     *
-     * @return array
-     */
+    /** Get the page body context. */
     protected function getBodyContext(): array
     {
         return [

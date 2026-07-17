@@ -10,21 +10,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class SettingsSanitizer
- *
- * Handles sanitization of plugin settings sections.
+ * Sanitizes plugin settings.
  *
  * @package StockForecastForWooCommerce\Services\Admin\Settings
- * @version 1.0.0
+ * @since   1.0.0
  */
 class SettingsSanitizer
 {
-    /**
-     * Sanitize forecast settings section.
-     *
-     * @param array $data
-     * @return array
-     */
+    /** Sanitizes forecast settings. */
     public function forecast(array $data): array
     {
         return Sanitize::map($data, [
@@ -35,12 +28,7 @@ class SettingsSanitizer
         ]);
     }
 
-    /**
-     * Sanitize all sections at once.
-     *
-     * @param array $data
-     * @return array
-     */
+    /** Sanitizes all settings sections. */
     public function all(array $data): array
     {
         return $this->forecast($data);

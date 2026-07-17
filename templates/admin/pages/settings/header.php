@@ -5,16 +5,13 @@
  *
  * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template variables are locally scoped via include.
  *
- * @package StockForecastForWooCommerce
- * @version 1.0.0
+ * @package StockForecastForWooCommerce\Templates\Admin\Pages\Settings
+ * @since   1.0.0
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
-
-use StockForecastForWooCommerce\Utils\TemplateUtils;
-
 ?>
 
 <!-- Page Header -->

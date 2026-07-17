@@ -10,34 +10,22 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class ProductForecastManager
- *
- * Registers the Product Forecast admin menu page.
+ * Manages the Product Forecast admin page.
  *
  * @package StockForecastForWooCommerce\Services\Admin\ProductForecast
- * @version 1.0.0
+ * @since   1.0.0
  */
 class ProductForecastManager
 {
-    /**
-     * Register hooks.
-     *
-     * @return void
-     */
+    /** Registers the product forecast hooks. */
     public function register(): void
     {
         add_filter('stock_forecast_for_woocommerce_menu_items', [$this, 'addMenuItem']);
 
-        // Register AJAX handler for refresh forecasts.
         AjaxComponent::register('refresh_forecasts', [$this, 'refreshForecasts'], false);
     }
 
-    /**
-     * Add Product Forecast menu item.
-     *
-     * @param array $items
-     * @return array
-     */
+    /** Adds the Product Forecast menu item. */
     public function addMenuItem(array $items): array
     {
         $items[] = [
@@ -50,14 +38,7 @@ class ProductForecastManager
         return $items;
     }
 
-    /**
-     * Handle the "refresh_forecasts" AJAX request.
-     *
-     * Pushes the product-forecast batch job into the queue and returns a
-     * standardized JSON success response.
-     *
-     * @return void
-     */
+    /** Refreshes product forecasts. */
     public function refreshForecasts(): void
     {
         // Safe: Nonce is verified and user capability is checked in AjaxComponent::register().

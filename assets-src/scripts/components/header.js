@@ -2,6 +2,8 @@
  * Admin UI - Header Component
  *
  * Requires: namespace.js, helpers.js
+ *
+ * @version 1.0.0
  */
 (function (window, document) {
     'use strict';

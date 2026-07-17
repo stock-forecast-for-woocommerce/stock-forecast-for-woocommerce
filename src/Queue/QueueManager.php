@@ -3,8 +3,8 @@
 namespace StockForecastForWooCommerce\Queue;
 
 use StockForecastForWooCommerce\Abstracts\AbstractSingleton;
-use StockForecastForWooCommerce\Utils\Logger;
 use StockForecastForWooCommerce\Config\PrefixConfig;
+use StockForecastForWooCommerce\Utils\Logger;
 use Throwable;
 
 if (!defined('ABSPATH')) {
@@ -12,27 +12,17 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class QueueManager
- *
- * Central dispatcher for background jobs using Action Scheduler.
+ * Manages background job dispatching.
  *
  * @package StockForecastForWooCommerce\Queue
- * @version 1.0.0
+ * @since   1.0.0
  */
 class QueueManager extends AbstractSingleton
 {
-    /**
-     * Registered jobs
-     *
-     * @var array
-     */
+    /** Registered job classes. */
     private array $jobs = [];
 
-    /**
-     * Register queue hooks.
-     *
-     * @return void
-     */
+    /** Register queue hooks. */
     public function register(): void
     {
         add_action('init', [$this, 'registerJobs']);
@@ -45,17 +35,14 @@ class QueueManager extends AbstractSingleton
         );
     }
 
-    /**
-     * Register job handlers.
-     *
-     * @return void
-     */
+    /** Register job handlers. */
     public function registerJobs(): void
     {
         /**
-         * Filter queue job classes.
+         * Filters the registered queue job classes.
          *
-         * @param array $jobs
+         * @param array $jobs Registered job class names.
+         * @since 1.0.0
          */
         $jobs = apply_filters(
             'stock_forecast_for_woocommerce_queue_jobs',
@@ -94,25 +81,19 @@ class QueueManager extends AbstractSingleton
         }
     }
 
-    /**
-     * Dispatch a job to Action Scheduler.
-     *
-     * @param string $job Job name.
-     * @param array $payload Job payload.
-     *
-     * @return void
-     */
+    /** Dispatch a job to Action Scheduler. */
     public function dispatch(string $job, array $payload = []): void
     {
         $jobId  = $job;
         $action = PrefixConfig::PREFIX . '_job_' . $job;
 
         /**
-         * Filter whether a queue job should run.
+         * Filters whether a queue job should be dispatched.
          *
-         * @param bool $enabled
-         * @param string $jobId
-         * @param array $payload
+         * @param bool $enabled Whether the job should be dispatched.
+         * @param string $jobId Queue job identifier.
+         * @param array $payload Queue job payload.
+         * @since 1.0.0
          */
         $enabled = apply_filters(
             'stock_forecast_for_woocommerce_queue_job_enabled',
@@ -140,7 +121,11 @@ class QueueManager extends AbstractSingleton
         try {
 
             /**
-             * Action before queue dispatch.
+             * Fires before a queue job is dispatched.
+             *
+             * @param string $jobId Queue job identifier.
+             * @param array $payload Queue job payload.
+             * @since 1.0.0
              */
             do_action(
                 'stock_forecast_for_woocommerce_before_queue_dispatch',
@@ -148,7 +133,8 @@ class QueueManager extends AbstractSingleton
                 $payload
             );
 
-            if (function_exists('as_has_scheduled_action') &&
+            if (
+                function_exists('as_has_scheduled_action') &&
                 as_has_scheduled_action($action, [$payload], PrefixConfig::PREFIX)
             ) {
                 Logger::debug('Queue job already scheduled', [
@@ -173,7 +159,11 @@ class QueueManager extends AbstractSingleton
             ]);
 
             /**
-             * Action after queue dispatch.
+             * Fires after a queue job is dispatched.
+             *
+             * @param string $jobId Queue job identifier.
+             * @param array $payload Queue job payload.
+             * @since 1.0.0
              */
             do_action(
                 'stock_forecast_for_woocommerce_after_queue_dispatch',
@@ -191,7 +181,12 @@ class QueueManager extends AbstractSingleton
             ]);
 
             /**
-             * Action when queue dispatch fails.
+             * Fires when queue job dispatch fails.
+             *
+             * @param string $jobId Queue job identifier.
+             * @param array $payload Queue job payload.
+             * @param Throwable $e Exception thrown during dispatch.
+             * @since 1.0.0
              */
             do_action(
                 'stock_forecast_for_woocommerce_queue_dispatch_failed',
@@ -202,14 +197,7 @@ class QueueManager extends AbstractSingleton
         }
     }
 
-    /**
-     * Push a job into the queue dispatcher.
-     *
-     * @param string $job Job name.
-     * @param array $payload Job payload.
-     *
-     * @return void
-     */
+    /** Push a job into the queue dispatcher. */
     public function push(string $job, array $payload = []): void
     {
         $job = trim($job);
@@ -224,6 +212,13 @@ class QueueManager extends AbstractSingleton
             'payload' => $payload,
         ]);
 
+        /**
+         * Fires when a queue job is requested.
+         *
+         * @param string $job Job name.
+         * @param array $payload Job payload.
+         * @since 1.0.0
+         */
         do_action(
             'stock_forecast_for_woocommerce_queue_dispatch',
             $job,

@@ -2,12 +2,12 @@
 
 namespace StockForecastForWooCommerce\Services\Forecast;
 
-use StockForecastForWooCommerce\Services\Forecast\Calculators\ForecastCalculator;
-use StockForecastForWooCommerce\Services\Forecast\Calculators\RiskEvaluator;
 use StockForecastForWooCommerce\Config\PluginSettings;
 use StockForecastForWooCommerce\DataProviders\ProductDataProvider;
 use StockForecastForWooCommerce\DataProviders\SalesDataProvider;
 use StockForecastForWooCommerce\Models\Forecast;
+use StockForecastForWooCommerce\Services\Forecast\Calculators\ForecastCalculator;
+use StockForecastForWooCommerce\Services\Forecast\Calculators\RiskEvaluator;
 use StockForecastForWooCommerce\Utils\OptionUtils;
 
 if (!defined('ABSPATH')) {
@@ -15,21 +15,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class ForecastEngine
- *
- * Handles stock forecast calculations for WooCommerce products.
+ * Processes stock forecasts for WooCommerce products.
  *
  * @package StockForecastForWooCommerce\Services\Forecast
- * @version 1.0.0
+ * @since   1.0.0
  */
 class ForecastEngine
 {
-    /**
-     * Process forecast for a single product.
-     *
-     * @param int $id
-     * @return void
-     */
+    /** Process a single product forecast. */
     public function processProduct(int $id): void
     {
         if ($id > 0) {
@@ -37,12 +30,7 @@ class ForecastEngine
         }
     }
 
-    /**
-     * Process forecast for multiple products.
-     *
-     * @param array $ids
-     * @return void
-     */
+    /** Process forecasts for multiple products. */
     public function processProducts(array $ids): void
     {
         if (empty($ids)) {
@@ -56,19 +44,21 @@ class ForecastEngine
         $evaluator  = new RiskEvaluator();
 
         $entities = $productProvider->expandProducts($ids);
+
         if (empty($entities)) {
             return;
         }
 
         $metaMap = $productProvider->fetchMetadata($entities);
 
-        $window   = (int)OptionUtils::getOption(
+        $window = (int)OptionUtils::getOption(
             OptionUtils::makeKey(
                 PluginSettings::SECTION_FORECAST,
                 PluginSettings::SALES_WINDOW_DAYS
             ),
             30
         );
+
         $salesMap = $salesProvider->getAggregatedSales($entities, $window);
 
         $results  = [];
@@ -82,7 +72,7 @@ class ForecastEngine
             if (!isset($metaMap[$targetId])) {
                 $toDelete[] = [
                     'product_id'   => $pId,
-                    'variation_id' => $vId
+                    'variation_id' => $vId,
                 ];
 
                 continue;
@@ -104,7 +94,7 @@ class ForecastEngine
                 'current_stock'       => $stock,
                 'daily_sales'         => $calc['daily_sales'],
                 'days_until_stockout' => $calc['days_until_stockout'],
-                'risk_level'          => $risk
+                'risk_level'          => $risk,
             ];
         }
 

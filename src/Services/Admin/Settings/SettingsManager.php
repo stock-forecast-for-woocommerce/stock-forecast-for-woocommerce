@@ -7,32 +7,21 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class SettingsManager
- *
- * Registers the plugin settings admin page.
+ * Manages the plugin settings page.
  *
  * @package StockForecastForWooCommerce\Services\Admin\Settings
- * @version 1.0.0
+ * @since   1.0.0
  */
 class SettingsManager
 {
-    /**
-     * Register hooks.
-     *
-     * @return void
-     */
+    /** Registers the settings hooks. */
     public function register(): void
     {
         add_filter('stock_forecast_for_woocommerce_menu_items', [$this, 'addMenuItem']);
         add_action('admin_post_sffw_save_settings', [$this, 'handle']);
     }
 
-    /**
-     * Add Settings menu item.
-     *
-     * @param array $items
-     * @return array
-     */
+    /** Adds the settings menu item. */
     public function addMenuItem(array $items): array
     {
         $items[] = [
@@ -45,11 +34,7 @@ class SettingsManager
         return $items;
     }
 
-    /**
-     * Handle settings save request.
-     *
-     * @return void
-     */
+    /** Handles settings save requests. */
     public function handle(): void
     {
         $settingsSaveHandler = new SettingsSaveHandler();

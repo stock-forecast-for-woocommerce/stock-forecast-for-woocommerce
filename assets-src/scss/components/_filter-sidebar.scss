@@ -31,8 +31,7 @@
     &__overlay {
       position: fixed;
       top: var(--wp-admin--admin-bar--height, 0);
-      left: 0;
-      right: 0;
+      inset-inline: 0;
       bottom: 0;
 
       background: rgba(0, 0, 0, .5);
@@ -48,7 +47,7 @@
     &__panel {
       position: fixed;
       top: var(--wp-admin--admin-bar--height, 0);
-      right: 0;
+      inset-inline-end: 0;
       bottom: 0;
 
       width: 26.25rem;
@@ -57,7 +56,7 @@
       background: css-var(card-bg);
       color: css-var(body-color);
 
-      border-left: css-var(border-width) solid css-var(border-color);
+      border-inline-start: css-var(border-width) solid css-var(border-color);
       box-shadow: css-var(box-shadow-lg);
 
       transform: translateX(100%);
@@ -67,6 +66,11 @@
       flex-direction: column;
     }
 
+    // RTL support
+    [dir="rtl"] &__panel {
+      transform: translateX(-100%);
+    }
+
     // -------------------------------------------------
     // Mobile fullscreen
     // -------------------------------------------------
@@ -74,7 +78,7 @@
       &__panel {
         width: 100%;
         max-width: 100%;
-        border-left: none;
+        border-inline-start: none;
       }
     }
 
@@ -230,7 +234,7 @@
 
     padding: 0 .35rem;
 
-    margin-left: .4rem;
+    margin-inline-start: .4rem;
 
     border-radius: css-var(border-radius-pill);
 

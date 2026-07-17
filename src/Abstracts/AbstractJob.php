@@ -10,29 +10,17 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class AbstractJob
- *
  * Base class for all queue jobs.
  *
  * @package StockForecastForWooCommerce\Abstracts
- * @version 1.0.0
+ * @since   1.0.0
  */
 abstract class AbstractJob
 {
-    /**
-     * Job name.
-     *
-     * Example: calculate_product_forecast
-     *
-     * @var string
-     */
+    /** Job name. */
     protected string $job = '';
 
-    /**
-     * Register job hook.
-     *
-     * @return void
-     */
+    /** Register job hook. */
     public function register(): void
     {
         $job = trim($this->job);
@@ -50,13 +38,7 @@ abstract class AbstractJob
         );
     }
 
-    /**
-     * Execute job with safety wrapper.
-     *
-     * @param array $payload
-     *
-     * @return void
-     */
+    /** Execute job with safety wrapper. */
     public function execute(array $payload = []): void
     {
         try {
@@ -102,24 +84,12 @@ abstract class AbstractJob
         }
     }
 
-    /**
-     * Get Action Scheduler hook name.
-     *
-     * @return string
-     */
+    /** Get Action Scheduler hook name. */
     protected function getAction(): string
     {
         return 'stock_forecast_for_woocommerce_job_' . trim($this->job);
     }
 
-    /**
-     * Handle job logic.
-     *
-     * Must be implemented in child class.
-     *
-     * @param array $payload
-     *
-     * @return void
-     */
+    /** Handle job logic. */
     abstract protected function handle(array $payload): void;
 }

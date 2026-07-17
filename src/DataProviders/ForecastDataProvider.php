@@ -10,18 +10,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class ForecastDataProvider
+ * Provides forecast-related database queries.
  *
  * @package StockForecastForWooCommerce\DataProviders
- * @version 1.0.0
+ * @since 1.0.0
  */
 class ForecastDataProvider extends AbstractDataProvider
 {
-    /**
-     * Return aggregated counts from the forecasts table.
-     *
-     * @return array
-     */
+    /** Return aggregated counts from the forecasts table. */
     public function getForecastStats(): array
     {
         global $wpdb;
@@ -53,13 +49,7 @@ class ForecastDataProvider extends AbstractDataProvider
         ];
     }
 
-    /**
-     * Get product IDs with stale or missing forecasts.
-     *
-     * @param int $limit
-     * @param int $afterId
-     * @return int[]
-     */
+    /** Get product IDs with stale or missing forecasts. */
     public function getStaleForecastProductIds(int $limit, int $afterId = 0): array
     {
         global $wpdb;
@@ -80,12 +70,7 @@ class ForecastDataProvider extends AbstractDataProvider
         return array_map('intval', $ids);
     }
 
-    /**
-     * Get critical products ordered by nearest stockout.
-     *
-     * @param int $limit
-     * @return array
-     */
+    /** Get critical products ordered by nearest stockout. */
     public function getCriticalProducts(int $limit = 10): array
     {
         global $wpdb;
@@ -104,16 +89,7 @@ class ForecastDataProvider extends AbstractDataProvider
         return array_map(static fn($row) => Forecast::make((array)$row), $rows);
     }
 
-    /**
-     * Get paginated forecasts with filters.
-     *
-     * @param int $perPage
-     * @param int $page
-     * @param string $orderBy
-     * @param string $order
-     * @param array $filters
-     * @return array
-     */
+    /** Get paginated forecasts with filters. */
     public function getForecasts(
         int    $perPage = 20,
         int    $page = 1,
@@ -132,7 +108,7 @@ class ForecastDataProvider extends AbstractDataProvider
             'id', 'days_until_stockout', 'current_stock', 'daily_sales', 'risk_level', 'last_calculated'
         ]);
 
-        $countSql = "SELECT COUNT(*) FROM {$table} {$join} {$whereSql}";
+        $countSql = "SELECT COUNT(*) FROM $table $join $whereSql";
 
         if (!empty($params)) {
             // phpcs:ignore PluginCheck.Security.DirectDB.UnescapedDBParameter, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.PreparedSQL.NotPrepared
@@ -144,11 +120,11 @@ class ForecastDataProvider extends AbstractDataProvider
 
         $paramsWithLimit = [...$params, $perPage, $offset];
         $sql             = "
-            SELECT {$table}.*
-            FROM {$table}
+            SELECT $table.*
+            FROM $table
             {$join}
             {$whereSql}
-            ORDER BY {$orderBy} {$order}
+            ORDER BY $orderBy $order
             LIMIT %d OFFSET %d
         ";
 
@@ -158,13 +134,7 @@ class ForecastDataProvider extends AbstractDataProvider
         return $this->formatPaginatedResult($rows, $total, $perPage, Forecast::class);
     }
 
-    /**
-     * Unique forecast-specific filters
-     *
-     * @param array $filters
-     * @param string $table
-     * @return array
-     */
+    /** Unique forecast-specific filters */
     private function buildForecastFilters(array $filters, string $table): array
     {
         global $wpdb;
@@ -174,24 +144,24 @@ class ForecastDataProvider extends AbstractDataProvider
         $params = [];
 
         if (!empty($filters['risk_level'])) {
-            $where[]  = "{$table}.risk_level = %s";
+            $where[]  = "$table.risk_level = %s";
             $params[] = $filters['risk_level'];
         }
 
         if (!empty($filters['product_type'])) {
-            $where[]  = "{$table}.product_type = %s";
+            $where[]  = "$table.product_type = %s";
             $params[] = $filters['product_type'];
         }
 
         if (!empty($filters['search'])) {
             $search  = trim($filters['search']);
             $join    = "
-                LEFT JOIN {$wpdb->posts} p 
-                ON p.ID = {$table}.product_id
+                LEFT JOIN $wpdb->posts p 
+                ON p.ID = $table.product_id
                 AND p.post_type IN ('product','product_variation')
                 AND p.post_status = 'publish'
             ";
-            $where[] = "({$table}.sku LIKE %s OR p.post_title LIKE %s)";
+            $where[] = "($table.sku LIKE %s OR p.post_title LIKE %s)";
             $like    = '%' . $wpdb->esc_like($search) . '%';
             array_push($params, $like, $like);
         }

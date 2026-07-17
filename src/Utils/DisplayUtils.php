@@ -11,22 +11,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class DisplayUtils.
- *
- * Utility class for rendering display strings used in the plugin.
+ * Formats plugin display values.
  *
  * @package StockForecastForWooCommerce\Utils
- * @version 1.0.0
+ * @since   1.0.0
  */
 class DisplayUtils
 {
-    /**
-     * Returns a localized string showing how long ago the forecast was last updated.
-     * If the timestamp is missing or invalid, returns a placeholder text.
-     *
-     * @param int|null $forecastLastUpdated
-     * @return string
-     */
+    /** Gets the forecast last updated display. */
     public static function getForecastLastUpdatedDisplay(?int $forecastLastUpdated = null): string
     {
         if ($forecastLastUpdated === null || $forecastLastUpdated <= 0) {
@@ -39,12 +31,7 @@ class DisplayUtils
         return sprintf(__('Last updated %s', 'stock-forecast-for-woocommerce'), $timeDiff);
     }
 
-    /**
-     * Convert a risk level key into a UI‑ready label + CSS class.
-     *
-     * @param string $risk
-     * @return array{label: string, class: string}
-     */
+    /** Formats a risk level for display. */
     public static function formatRiskLevel(string $risk): array
     {
         switch ($risk) {
@@ -86,15 +73,7 @@ class DisplayUtils
         }
     }
 
-    /**
-     * Returns the formatted product display name for simple or variable products.
-     *
-     * Simple products → Product Name
-     * Variations → Parent Product Name — Variation Attributes
-     *
-     * @param WC_Product $product WooCommerce product object (simple or variation).
-     * @return string Human‑friendly product title for UI display.
-     */
+    /** Gets the product display name. */
     public static function getProductDisplayName(WC_Product $product): string
     {
         if ($product instanceof WC_Product_Variation) {
@@ -119,12 +98,7 @@ class DisplayUtils
         return $product->get_name();
     }
 
-    /**
-     * Returns a human‑friendly "time ago" string for a MySQL datetime value.
-     *
-     * @param string|null $datetime MySQL datetime (Y-m-d H:i:s).
-     * @return string
-     */
+    /** Gets the forecast last calculated display. */
     public static function getForecastLastCalculatedDisplay(?string $datetime): string
     {
         if (empty($datetime)) {

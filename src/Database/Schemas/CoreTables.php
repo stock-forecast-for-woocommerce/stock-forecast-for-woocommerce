@@ -2,7 +2,8 @@
 
 namespace StockForecastForWooCommerce\Database\Schemas;
 
-use StockForecastForWooCommerce\Database\DatabaseManager;
+use StockForecastForWooCommerce\Database\SchemaBuilder;
+use StockForecastForWooCommerce\Database\SchemaRegistry;
 use StockForecastForWooCommerce\Database\TableSchema;
 
 if (!defined('ABSPATH')) {
@@ -10,30 +11,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class CoreTables
- *
- * Defines core database tables for the plugin.
+ * Defines core database tables.
  *
  * @package StockForecastForWooCommerce\Database\Schemas
- * @version 1.0.0
+ * @since   1.0.0
  */
 class CoreTables
 {
-    /**
-     * Register table creation hooks.
-     *
-     * @return void
-     */
-    public static function register(): void
-    {
-        add_action('stock_forecast_for_woocommerce_create_tables', [self::class, 'createTables']);
-    }
-
-    /**
-     * Get all table schemas for this provider.
-     *
-     * @return TableSchema[]
-     */
+    /** Get all table schemas for this provider. */
     public static function getSchemas(): array
     {
         return [
@@ -41,23 +26,16 @@ class CoreTables
         ];
     }
 
-    /**
-     * Register and create all core tables.
-     *
-     * @return void
-     */
+    /** Register and create all core tables. */
     public static function createTables(): void
     {
-        DatabaseManager::registerTable(self::getForecastsSchema());
-        DatabaseManager::createTables();
+        SchemaRegistry::registerTable(self::getForecastsSchema());
+
+        SchemaBuilder::createTables();
     }
 
-    /**
-     * Forecasts table schema.
-     *
-     * @return TableSchema
-     */
-    private static function getForecastsSchema(): TableSchema
+    /** Forecasts table schema. */
+    public static function getForecastsSchema(): TableSchema
     {
         $schema = new TableSchema('forecasts');
 
@@ -73,16 +51,10 @@ class CoreTables
             ->varchar('risk_level', 20)->nullable()
             ->datetime('last_calculated')->nullable()
             ->timestamps()
-
-            // Unique Constraint
             ->unique('forecast_product_variation_unique', ['product_id', 'variation_id'])
-
-            // Search and Filter Indexes
             ->index('forecast_sku_index', ['sku'])
             ->index('forecast_type_index', ['product_type'])
             ->index('forecast_risk_index', ['risk_level'])
-
-            // Sorting and Performance Indexes
             ->index('forecast_stockout_sort_index', ['days_until_stockout'])
             ->index('forecast_stock_sort_index', ['current_stock'])
             ->index('forecast_sales_sort_index', ['daily_sales'])
@@ -90,4 +62,5 @@ class CoreTables
 
         return $schema;
     }
+
 }

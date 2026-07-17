@@ -9,79 +9,38 @@ if (!defined('ABSPATH')) {
 /**
  * Cache key definitions used by the plugin.
  *
- * Returned keys do not include cache group prefixes.
- *
  * @package StockForecastForWooCommerce\Cache
- * @version 1.0.0
+ * @since   1.0.0
  */
-final class CacheKeys
+class CacheKeys
 {
-    /**
-     * Prevent instantiation
-     */
+    /** Prevent instantiation. */
     private function __construct()
     {
     }
 
-    /**
-     * Cache key for persistent admin notices.
-     *
-     * Stores notices that should remain until manually dismissed.
-     */
+    /** Cache key for persistent admin notices. */
     private const KEY_ADMIN_NOTICES = 'admin_notices';
 
-    /**
-     * Cache key for flash admin notices.
-     *
-     * Stores one-time notices that display on the next request and auto-expire.
-     */
+    /** Cache key for flash admin notices. */
     private const KEY_ADMIN_FLASH_NOTICES = 'admin_flash_notices';
 
-    /**
-     * Cache key used to flag when rewrite rules should be flushed.
-     */
-    private const KEY_FLUSH_REWRITE = 'flush_rewrite_rules';
-
-    /**
-     * Cache key used for daily cron lock prevention.
-     */
+    /** Cache key used for daily cron lock prevention. */
     private const KEY_DAILY_LOCK = 'daily_lock';
 
-    /**
-     * Get admin notices cache key.
-     *
-     * @return string
-     */
+    /** Get admin notices cache key. */
     public static function adminNotices(): string
     {
         return self::KEY_ADMIN_NOTICES;
     }
 
-    /**
-     * Get admin flash notices cache key.
-     *
-     * @return string
-     */
+    /** Get admin flash notices cache key. */
     public static function adminFlashNotices(): string
     {
         return self::KEY_ADMIN_FLASH_NOTICES;
     }
 
-    /**
-     * Get rewrite rules flush flag key.
-     *
-     * @return string
-     */
-    public static function flushRewriteRules(): string
-    {
-        return self::KEY_FLUSH_REWRITE;
-    }
-
-    /**
-     * Daily cron lock key.
-     *
-     * @return string
-     */
+    /** Daily cron lock key. */
     public static function dailyLock(): string
     {
         return self::KEY_DAILY_LOCK;

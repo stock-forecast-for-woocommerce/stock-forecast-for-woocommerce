@@ -6,35 +6,25 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+use StockForecastForWooCommerce\Cache\CacheManager;
 use StockForecastForWooCommerce\Config\PrefixConfig;
-use StockForecastForWooCommerce\Config\PluginOptions;
 use StockForecastForWooCommerce\Database\Schemas\CoreTables;
+use StockForecastForWooCommerce\Config\PluginOptions;
 
 /**
- * Class UninstallHandler
- *
  * Handles plugin uninstallation logic for complete cleanup.
- * This class provides methods that can be called from uninstall.php.
  *
  * @package StockForecastForWooCommerce\Lifecycle
- * @version 1.0.0
+ * @since   1.0.0
  */
 class UninstallHandler
 {
-    /**
-     * Table schema classes used by the plugin.
-     *
-     * @var array
-     */
+    /** Table schema classes used by the plugin. */
     private static array $tableSchemas = [
         CoreTables::class,
     ];
 
-    /**
-     * Run uninstallation logic.
-     *
-     * @return void
-     */
+    /** Run uninstallation logic. */
     public static function uninstall(): void
     {
         if (!defined('WP_UNINSTALL_PLUGIN')) {
@@ -48,11 +38,7 @@ class UninstallHandler
         }
     }
 
-    /**
-     * Run uninstall for a single site.
-     *
-     * @return void
-     */
+    /** Run uninstall for a single site. */
     private static function singleUninstall(): void
     {
         self::deleteOptions();
@@ -61,19 +47,23 @@ class UninstallHandler
         self::deleteTransients();
         self::clearCronHooks();
         self::deleteUploads();
+        self::flushRewriteRules();
+
+        /**
+         * Fires after the plugin has been completely uninstalled.
+         *
+         * @since 1.0.0
+         */
+        do_action('stock_forecast_for_woocommerce_uninstalled');
     }
 
-    /**
-     * Run uninstall for all sites in a network.
-     *
-     * @return void
-     */
+    /** Run uninstall for all sites in a network. */
     private static function networkUninstall(): void
     {
         global $wpdb;
 
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Multisite network query requires direct access
-        $blogIds = $wpdb->get_col("SELECT blog_id FROM {$wpdb->blogs}");
+        $blogIds = $wpdb->get_col("SELECT blog_id FROM $wpdb->blogs");
 
         foreach ($blogIds as $blogId) {
             switch_to_blog($blogId);
@@ -82,100 +72,62 @@ class UninstallHandler
         }
     }
 
-    /**
-     * Delete all plugin options.
-     *
-     * @return void
-     */
-    public static function deleteOptions(): void
+    /** Delete all plugin options. */
+    private static function deleteOptions(): void
     {
         global $wpdb;
 
-        // Delete main plugin option
         delete_option(PluginOptions::OPTION_NAME);
 
-        // Delete any options with our prefix
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Bulk cleanup on uninstall requires direct query
         $wpdb->query(
             $wpdb->prepare(
-                "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s",
+                "DELETE FROM $wpdb->options WHERE option_name LIKE %s",
                 PluginOptions::META_PREFIX . '%'
             )
         );
     }
 
-    /**
-     * Delete all user meta created by the plugin.
-     *
-     * @return void
-     */
-    public static function deleteUserMeta(): void
+    /** Delete all user meta created by the plugin. */
+    private static function deleteUserMeta(): void
     {
         delete_metadata('user', 0, PluginOptions::OPTION_NAME, '', true);
     }
 
-    /**
-     * Delete custom database tables.
-     *
-     * @return void
-     */
-    public static function deleteTables(): void
+    /** Delete custom database tables. */
+    private static function deleteTables(): void
     {
         global $wpdb;
 
         $schemas        = self::$tableSchemas;
-        $fullTableNames = [];
+        $tablesToDelete = [];
 
         foreach ($schemas as $schemaClass) {
             if (class_exists($schemaClass) && method_exists($schemaClass, 'getSchemas')) {
                 $tables = $schemaClass::getSchemas();
 
                 foreach ($tables as $table) {
-                    $fullTableNames[] = $table->getFullName();
+                    $tablesToDelete[] = $table->getFullName();
                 }
             }
         }
-
-        /**
-         * Filter the list of tables to delete on uninstall.
-         *
-         * @param array $tables Array of full table names (with prefix).
-         */
-        $tablesToDelete = apply_filters('stock_forecast_for_woocommerce_tables_to_delete', $fullTableNames);
 
         foreach ($tablesToDelete as $tableName) {
             $tableName = esc_sql($tableName);
 
             // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching, WordPress.DB.DirectDatabaseQuery.SchemaChange, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Table name is sanitized above
-            $wpdb->query("DROP TABLE IF EXISTS {$tableName}");
+            $wpdb->query("DROP TABLE IF EXISTS $tableName");
         }
     }
 
-    /**
-     * Delete all transients.
-     *
-     * @return void
-     */
-    public static function deleteTransients(): void
+    /** Delete all transients. */
+    private static function deleteTransients(): void
     {
-        global $wpdb;
-
-        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching -- Bulk cleanup on uninstall requires direct query
-        $wpdb->query(
-            $wpdb->prepare(
-                "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s OR option_name LIKE %s",
-                '_transient_' . PluginOptions::META_PREFIX . '%',
-                '_transient_timeout_' . PluginOptions::META_PREFIX . '%'
-            )
-        );
+        CacheManager::instance()->flush();
     }
 
-    /**
-     * Delete uploaded files.
-     *
-     * @return void
-     */
-    public static function deleteUploads(): void
+    /** Delete uploaded files. */
+    private static function deleteUploads(): void
     {
         $uploadDir        = wp_upload_dir();
         $pluginUploadsDir = $uploadDir['basedir'] . '/' . PrefixConfig::handle('logs');
@@ -185,21 +137,14 @@ class UninstallHandler
         }
     }
 
-    /**
-     * Clear all scheduled cron hooks.
-     *
-     * @return void
-     */
-    public static function clearCronHooks(): void
+    /** Clear all scheduled cron hooks. */
+    private static function clearCronHooks(): void
     {
-        if (function_exists('as_unschedule_all_actions')) {
-            as_unschedule_all_actions(null, [], PrefixConfig::PREFIX);
-        }
-
         /**
-         * Filter the list of cron hooks to clear on uninstall.
+         * Filters the list of cron hooks to clear on uninstall.
          *
          * @param array $hooks Array of hook names to clear.
+         * @since  1.0.0
          */
         $hooks = apply_filters('stock_forecast_for_woocommerce_cron_hooks_to_clear', [
             'stock_forecast_for_woocommerce_daily_cron',
@@ -210,12 +155,7 @@ class UninstallHandler
         }
     }
 
-    /**
-     * Recursively delete a directory.
-     *
-     * @param string $dir Directory path.
-     * @return void
-     */
+    /** Recursively delete a directory. */
     private static function deleteDirectory(string $dir): void
     {
         if (!is_dir($dir)) {
@@ -241,5 +181,11 @@ class UninstallHandler
         }
 
         $wp_filesystem->rmdir($dir);
+    }
+
+    /** Flush rewrite rules. */
+    private static function flushRewriteRules(): void
+    {
+        flush_rewrite_rules();
     }
 }

@@ -4,8 +4,8 @@
  *
  * This file renders the admin footer and closes the wrapper div.
  *
- * @package StockForecastForWooCommerce
- * @version 1.0.0
+ * @package StockForecastForWooCommerce\Templates\Admin\Layouts
+ * @since   1.0.0
  */
 
 if (!defined('ABSPATH')) {
