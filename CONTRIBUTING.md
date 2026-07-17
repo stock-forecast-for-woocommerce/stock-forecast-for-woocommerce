@@ -1,116 +1,38 @@
 # Contributing to Stock Forecast for WooCommerce
 
+We welcome bug reports, feature ideas, and pull requests.
 
+## Reporting Bugs
 
-Thank you for your interest in contributing to Stock Forecast for WooCommerce. We welcome all types of contributions, including bug reports, feature requests, improvements, and pull requests.
+Open an issue with:
 
-
-
-## How to Contribute
-
-
-
-### Reporting Bugs
-
-
-
-If you discover a bug, please open an issue and include:
-
-
-
-- A clear and descriptive title
-
-- Steps to reproduce the issue
-
+- Clear title and steps to reproduce
 - Expected vs. actual behavior
-
-- Screenshots if applicable
-
 - WordPress, WooCommerce, theme, and PHP versions
+- Any conflicting plugins
 
-- Any plugins or conflicts related to the issue
+## Suggesting Features
 
+Describe the problem, why it helps store owners, and how it should behave.
 
+## Pull Requests
 
-### Suggesting Features
-
-
-
-Feature suggestions are always welcome.
-
-
-
-When opening a feature request, please describe:
-
-
-
-- The problem or use case
-
-- How the feature benefits store owners
-
-- Suggested behavior or UI if relevant
-
-
-
-### Submitting Pull Requests
-
-
-
-1. Fork the repository
-
-2. Create a new branch for your fix or feature
-
-3. Follow the existing project structure and coding style
-
-4. Document your code where appropriate
-
-5. Test your changes with WooCommerce enabled
-
-6. Submit a pull request with a clear explanation of your work
-
-
+1. Fork the repo
+2. Create a branch for your change
+3. Follow WordPress and WooCommerce coding standards
+4. Test your changes with WooCommerce enabled
+5. Open a PR with a clear explanation
 
 ## Development Guidelines
 
-
-
-- Follow WordPress and WooCommerce coding standards
-
-- Keep changes focused and avoid large, multi-purpose PRs
-
-- Maintain performance - the plugin must remain lightweight
-
-- Avoid adding unnecessary dependencies or external services
-
-- Ensure backward compatibility where possible
-
-- Avoid long-running queries that may impact large stores
-
-- Avoid modifying database schema without discussion
-
-
-
-## Forecast System Guidelines
-
-
-
-If your contribution affects the forecasting engine, please ensure:
-
-
-
-- Recalculation logic remains efficient and batch-safe
-
-- Real-time stock change hooks remain performant
-
-- Dashboard Stat caching continues to work
-
+- Keep performance a priority – lightweight queries, no long-running processes
+- Ensure forecasting logic is efficient and batch-safe
+- Real-time stock change hooks must remain performant
 - Variable products and variations forecast independently and accurately
-
-
+- Dashboard stat caching must continue to work
+- No unnecessary dependencies or external services
+- Maintain backward compatibility
 
 ## License
 
-
-
-By contributing to this project, you agree that your contributions will be licensed under the same license as the project (GPL-2.0-or-later).
-
+By contributing, you agree that your contributions will be licensed under the GPL-2.0-or-later license.

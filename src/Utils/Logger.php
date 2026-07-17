@@ -244,7 +244,7 @@ class Logger
     /** Write a message to the PHP error log. */
     private static function writeToErrorLog(string $level, string $message, array $context): void
     {
-        $prefix     = '[Proactive Site Advisor]';
+        $prefix     = '[Stock Forecast for WooCommerce]';
         $contextStr = !empty($context) ? ' | ' . wp_json_encode($context) : '';
 
         /** @noinspection ForgottenDebugOutputInspection */

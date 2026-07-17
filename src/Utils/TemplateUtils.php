@@ -22,8 +22,8 @@ class TemplateUtils
         }
 
         $paths = [
-            get_stylesheet_directory() . "/proactive-site-advisor/templates/{$templateName}",
-            get_template_directory() . "/proactive-site-advisor/templates/{$templateName}",
+            get_stylesheet_directory() . "/stock-forecast-for-woocommerce/templates/{$templateName}",
+            get_template_directory() . "/stock-forecast-for-woocommerce/templates/{$templateName}",
             STOCK_FORECAST_FOR_WOOCOMMERCE_TEMPLATES_PATH . $templateName,
         ];
 

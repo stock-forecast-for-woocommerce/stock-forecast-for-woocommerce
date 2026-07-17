@@ -3,7 +3,7 @@
 /**
  * Plugin Name:         Stock Forecast for WooCommerce
  * Plugin URI:          https://github.com/stock-forecast-for-woocommerce/stock-forecast-for-woocommerce
- * Description:         Predicts WooCommerce stockout dates using sales velocity. Real-time forecasts, color-coded risk levels, and variable product support. No inventory changes.
+ * Description:         Predict stockout dates before they cost you sales. Real‑time forecasts, color‑coded risk levels, and variable product support — no inventory changes.
  * Version:             1.0.0
  * Author:              Mohammad Yari
  * Author URI:          https://github.com/stock-forecast-for-woocommerce
