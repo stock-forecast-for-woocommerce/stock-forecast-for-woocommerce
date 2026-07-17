@@ -10,22 +10,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class SalesDataProvider
- *
- * Handles Aggregated Sales Retrieval.
+ * Provides aggregated sales data.
  *
  * @package StockForecastForWooCommerce\DataProviders
- * @version 1.0.0
+ * @since   1.0.0
  */
 class SalesDataProvider extends AbstractDataProvider
 {
-    /**
-     * Aggregates sales from WC lookup tables.
-     *
-     * @param array $entities
-     * @param int $days
-     * @return array
-     */
+    /** Get aggregated sales for forecastable entities. */
     public function getAggregatedSales(array $entities, int $days): array
     {
         global $wpdb;
@@ -38,7 +30,7 @@ class SalesDataProvider extends AbstractDataProvider
 
         $placeholders = implode(',', array_fill(0, count($productIds), '%d'));
         $dateLimit    = DateTimeUtils::current()
-            ->modify("-{$days} days")
+            ->modify("-$days days")
             ->format(DateTimeUtils::FORMAT_DATETIME);
 
         // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching

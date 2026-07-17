@@ -7,39 +7,27 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class DashboardManager
- *
- * Registers the admin dashboard menu for the plugin.
+ * Registers the plugin dashboard menu.
  *
  * @package StockForecastForWooCommerce\Services\Admin\Dashboard
- * @version 1.0.0
+ * @since   1.0.0
  */
 class DashboardManager
 {
-    /**
-     * Register hooks.
-     *
-     * @return void
-     */
+    /** Register dashboard hooks. */
     public function register(): void
     {
         add_filter('stock_forecast_for_woocommerce_menu_items', [$this, 'addMenuItem']);
     }
 
-    /**
-     * Add dashboard menu items.
-     *
-     * @param array $items
-     * @return array
-     */
+    /** Add dashboard menu items. */
     public function addMenuItem(array $items): array
     {
         /**
-         * Apply a filter to determine the position of the plugin menu item.
+         * Filters the plugin menu position.
          *
-         * @param float $position The default position of the menu item in the admin menu.
-         *
-         * @return float The possibly modified position after applying filters.
+         * @param float $position Default admin menu position.
+         * @since 1.0.0
          */
         $position = apply_filters('stock_forecast_for_woocommerce_menu_item_position', 56);
 

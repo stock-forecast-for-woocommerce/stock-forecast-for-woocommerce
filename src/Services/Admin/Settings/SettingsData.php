@@ -11,30 +11,20 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class SettingsData
- *
- * Provides plugin settings data for the admin settings page.
+ * Provides admin settings data.
  *
  * @package StockForecastForWooCommerce\Services\Admin\Settings
- * @version 1.0.0
+ * @since   1.0.0
  */
 class SettingsData
 {
-    /**
-     * Get all plugin settings.
-     *
-     * @return array
-     */
+    /** Gets all plugin settings. */
     public function getSettings(): array
     {
         return OptionUtils::getAllOptions();
     }
 
-    /**
-     * Get settings sections.
-     *
-     * @return array
-     */
+    /** Gets settings sections. */
     public function getSections(): array
     {
         $sections = [
@@ -46,9 +36,10 @@ class SettingsData
         ];
 
         /**
-         * Filter plugin settings sections.
+         * Filters plugin settings sections.
          *
-         * @param array $sections
+         * @param array $sections Settings sections.
+         * @since 1.0.0
          */
         return apply_filters(
             'stock_forecast_for_woocommerce_settings_sections',

@@ -8,16 +8,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class PluginSettings
+ * Defines plugin configuration keys and settings constants.
  *
  * @package StockForecastForWooCommerce\Config
- * @version 1.0.0
+ * @since 1.0.0
  */
-final class PluginSettings
+class PluginSettings
 {
-    /**
-     * Forecast settings section.
-     */
+    /** Forecast settings section. */
     public const SECTION_FORECAST = 'forecast';
 
     /*
@@ -26,23 +24,15 @@ final class PluginSettings
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * Sales analysis window (days).
-     */
+    /** Sales analysis window (days). */
     public const SALES_WINDOW_DAYS = 'sales_window_days';
 
-    /**
-     * Product batch processing size.
-     */
+    /** Product batch processing size.  */
     public const BATCH_SIZE = 'batch_size';
 
-    /**
-     * Low stock threshold (days).
-     */
+    /** Low stock threshold (days). */
     public const WARNING_DAYS = 'warning_days';
 
-    /**
-     * Critical stock threshold (days).
-     */
+    /** Critical stock threshold (days). */
     public const CRITICAL_DAYS = 'critical_days';
 }

@@ -12,20 +12,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class SettingsSaveHandler
- *
- * Handles saving of plugin settings via admin-post.
+ * Handles settings save requests.
  *
  * @package StockForecastForWooCommerce\Services\Admin\Settings
- * @version 1.0.0
+ * @since   1.0.0
  */
 class SettingsSaveHandler
 {
-    /**
-     * Process settings save request.
-     *
-     * @return void
-     */
+    /** Processes settings save requests. */
     public function handle(): void
     {
         if (Request::str('action', '', 'post') !== 'sffw_save_settings') {
@@ -53,7 +47,7 @@ class SettingsSaveHandler
 
         AdminNotices::success(
             sprintf(
-                /* translators: %s: URL to the Product Forecast page */
+            /* translators: %s: URL to the Product Forecast page */
                 __(
                     'Please go to the <a href="%s"><strong>Product Forecast</strong></a> page and click <strong>Refresh Forecasts</strong> once to regenerate forecasts using the new settings.',
                     'stock-forecast-for-woocommerce'

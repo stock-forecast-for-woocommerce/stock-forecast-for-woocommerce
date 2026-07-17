@@ -2,6 +2,8 @@
  * Admin UI - Configuration
  *
  * Requires: namespace.js
+ *
+ * @version 1.0.0
  */
 (function (window, document) {
     'use strict';

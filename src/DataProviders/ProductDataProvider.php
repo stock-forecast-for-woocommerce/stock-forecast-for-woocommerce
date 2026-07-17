@@ -9,21 +9,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class ProductDataProvider
- *
- * Handles Product Expansion and Metadata Retrieval.
+ * Provides product expansion and metadata retrieval.
  *
  * @package StockForecastForWooCommerce\DataProviders
- * @version 1.0.0
+ * @since   1.0.0
  */
 class ProductDataProvider extends AbstractDataProvider
 {
-    /**
-     * Expands a list of IDs into Forecastable Entities (Simple + Variations).
-     *
-     * @param array $ids
-     * @return array
-     */
+    /** Expand product IDs into forecastable entities. */
     public function expandProducts(array $ids): array
     {
         global $wpdb;
@@ -41,7 +34,7 @@ class ProductDataProvider extends AbstractDataProvider
                 "SELECT 
                     p.ID AS variation_id,
                     p.post_parent AS product_id
-                 FROM {$wpdb->posts} p
+                 FROM $wpdb->posts p
                  WHERE p.post_type = 'product_variation'
                  AND p.post_status = 'publish'
                  AND p.post_parent IN ($placeholders)", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare
@@ -80,12 +73,7 @@ class ProductDataProvider extends AbstractDataProvider
         return array_values($expanded);
     }
 
-    /**
-     * Fetches Metadata (SKU, Stock) for all expanded entities.
-     *
-     * @param array $entities
-     * @return array
-     */
+    /** Fetch metadata for forecastable entities. */
     public function fetchMetadata(array $entities): array
     {
         global $wpdb;
@@ -113,11 +101,11 @@ class ProductDataProvider extends AbstractDataProvider
                     l.stock_quantity,
                     pm_backorder.meta_value AS backorder_status
                 FROM {$wpdb->prefix}wc_product_meta_lookup l
-                INNER JOIN {$wpdb->postmeta} pm_manage 
+                INNER JOIN $wpdb->postmeta pm_manage 
                     ON pm_manage.post_id = l.product_id 
                     AND pm_manage.meta_key = '_manage_stock' 
                     AND pm_manage.meta_value = 'yes'
-                LEFT JOIN {$wpdb->postmeta} pm_backorder 
+                LEFT JOIN $wpdb->postmeta pm_backorder 
                     ON pm_backorder.post_id = l.product_id 
                     AND pm_backorder.meta_key = '_backorders'
                 WHERE l.product_id IN ($placeholders)", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared,WordPress.DB.PreparedSQLPlaceholders.UnfinishedPrepare

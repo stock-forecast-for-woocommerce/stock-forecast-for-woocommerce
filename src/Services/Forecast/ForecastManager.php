@@ -18,18 +18,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class ForecastManager
- *
  * Coordinates forecast jobs and WooCommerce events.
  *
  * @package StockForecastForWooCommerce\Services\Forecast
- * @version 1.0.0
+ * @since   1.0.0
  */
 class ForecastManager
 {
-    /**
-     * Register hooks and queue jobs.
-     */
+    /** Register forecast hooks and services. */
     public function register(): void
     {
         add_filter('stock_forecast_for_woocommerce_queue_jobs', [$this, 'registerForecastJobs']);
@@ -47,12 +43,7 @@ class ForecastManager
         add_action('before_delete_post', [$this, 'onProductDeleted']);
     }
 
-    /**
-     * Register forecast jobs in the queue system.
-     *
-     * @param array $jobs
-     * @return array
-     */
+    /** Register forecast queue jobs. */
     public function registerForecastJobs(array $jobs): array
     {
         $forecastJobs = [
@@ -63,26 +54,17 @@ class ForecastManager
         return array_merge($jobs, $forecastJobs);
     }
 
-    /**
-     * Registers daily cron services by merging them with the existing service list.
-     *
-     * @param array $services
-     * @return array
-     */
+    /** Register daily forecast cron services. */
     public function registerDailyCronServices(array $services): array
     {
         $dailyCronServices = [
-            DailyStaleForecast::class
+            DailyStaleForecast::class,
         ];
 
         return array_merge($services, $dailyCronServices);
     }
 
-    /**
-     * Dispatch the initial full forecast job.
-     *
-     * @return void
-     */
+    /** Dispatch the initial forecast job. */
     public function dispatchInitialForecast(): void
     {
         $isInitialForecastQueued = OptionUtils::getMeta(PluginMeta::INITIAL_FORECAST_DISPATCHED);
@@ -96,11 +78,7 @@ class ForecastManager
         OptionUtils::setMeta(PluginMeta::INITIAL_FORECAST_DISPATCHED, 'yes');
     }
 
-    /**
-     * Dispatch forecast job for a single product.
-     *
-     * @param WC_Product|int $product
-     */
+    /** Dispatch a forecast job for a product. */
     public function dispatchProductForecast($product): void
     {
         $productObj = $product instanceof WC_Product ? $product : wc_get_product((int)$product);
@@ -135,11 +113,7 @@ class ForecastManager
         );
     }
 
-    /**
-     * Dispatch forecast jobs for products in an order.
-     *
-     * @param int $orderId
-     */
+    /** Dispatch forecast jobs for an order. */
     public function dispatchOrderForecasts(int $orderId): void
     {
         $order = wc_get_order($orderId);
@@ -181,17 +155,13 @@ class ForecastManager
         }
     }
 
-    /**
-     * Handle deletion of a WooCommerce variation.
-     */
+    /** Handle variation deletion. */
     public function onVariationDeleted(int $variationId): void
     {
         Forecast::deleteByVariationId($variationId);
     }
 
-    /**
-     * Handle deletion of a WooCommerce product.
-     */
+    /** Handle product deletion. */
     public function onProductDeleted(int $postId): void
     {
         if (get_post_type($postId) !== 'product') {

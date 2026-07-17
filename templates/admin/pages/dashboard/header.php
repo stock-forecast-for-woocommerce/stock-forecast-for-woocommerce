@@ -5,8 +5,8 @@
  *
  * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template variables are locally scoped via include.
  *
- * @package StockForecastForWooCommerce
- * @version 1.0.0
+ * @package StockForecastForWooCommerce\Templates\Admin\Pages\Dashboard
+ * @since   1.0.0
  *
  * @var string $forecastLastUpdatedDisplay
  * @var string $forecastUpdateLink

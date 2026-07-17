@@ -1,8 +1,9 @@
 /**
  * Admin UI - Settings Tabs Component
  *
- * Handles vertical menu tab switching for settings page.
  * Requires: namespace.js, helpers.js, config.js
+ *
+ * @version 1.0.0
  */
 (function (window, document) {
     'use strict';
@@ -28,7 +29,7 @@
          */
         init: function () {
             this.sections = document.querySelectorAll(SFFW.selector('settings__section'));
-            this.navButtons = document.querySelectorAll(SFFW.selector('nav-item'));
+            this.navButtons = document.querySelectorAll(SFFW.selector('settings-sidebar-nav-item'));
 
             if (!this.sections.length || !this.navButtons.length) return;
 
@@ -121,7 +122,7 @@
             if (!hash) return;
 
             const targetBtn = document.querySelector(
-                SFFW.selector('nav-item') +
+                SFFW.selector('settings-sidebar-nav-item') +
                 '[' + SFFW.dataAttr('section') + '="' + hash + '"]'
             );
 

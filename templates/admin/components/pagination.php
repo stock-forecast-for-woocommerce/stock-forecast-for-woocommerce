@@ -5,8 +5,8 @@
  * phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound -- Template variables are locally scoped via include.
  * phpcs:disable WordPress.Security.NonceVerification
  *
- * @package StockForecastForWooCommerce
- * @version 1.0.0
+ * @package StockForecastForWooCommerce\Templates\Admin\Components
+ * @since   1.0.0
  *
  * @var int $current
  * @var int $perPage

@@ -2,11 +2,11 @@
 
 namespace StockForecastForWooCommerce\Services\Admin\Dashboard;
 
-use StockForecastForWooCommerce\DataProviders\ForecastDataProvider;
+use StockForecastForWooCommerce\Config\PluginMeta;
 use StockForecastForWooCommerce\Config\PrefixConfig;
+use StockForecastForWooCommerce\DataProviders\ForecastDataProvider;
 use StockForecastForWooCommerce\Utils\DisplayUtils;
 use StockForecastForWooCommerce\Utils\MenuUtils;
-use StockForecastForWooCommerce\Config\PluginMeta;
 use StockForecastForWooCommerce\Utils\OptionUtils;
 
 if (!defined('ABSPATH')) {
@@ -14,31 +14,23 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Class DashboardData
+ * Provides dashboard data for the admin interface.
  *
  * @package StockForecastForWooCommerce\Services\Admin\Dashboard
- * @version 1.0.0
+ * @since   1.0.0
  */
 class DashboardData
 {
-    /**
-     * @var ForecastDataProvider
-     */
+    /** Forecast data provider. */
     private ForecastDataProvider $forecastDataProvider;
 
-    /**
-     * Constructor.
-     */
+    /** Initialize the dashboard data provider. */
     public function __construct()
     {
         $this->forecastDataProvider = new ForecastDataProvider();
     }
 
-    /**
-     * Returns an array of statistics related to product stock forecasts.
-     *
-     * @return array
-     */
+    /** Get dashboard forecast statistics. */
     public function getStats(): array
     {
         $forecastStats = $this->forecastDataProvider->getForecastStats();
@@ -95,11 +87,7 @@ class DashboardData
         ];
     }
 
-    /**
-     * Returns a formatted string showing when the forecast was last updated.
-     *
-     * @return string
-     */
+    /** Get the last forecast update display value. */
     public function getForecastLastUpdatedDisplay(): string
     {
         $forecastLastUpdated = (int)OptionUtils::getMeta(PluginMeta::FORECAST_LAST_UPDATED);
@@ -107,14 +95,7 @@ class DashboardData
         return DisplayUtils::getForecastLastUpdatedDisplay($forecastLastUpdated);
     }
 
-    /**
-     * Prepare critical products data for the dashboard table.
-     *
-     * Fetches products at highest risk of stockout, preloads WooCommerce products,
-     * and formats the data structure for UI display.
-     *
-     * @return array<int, array<string, mixed>> List of formatted product rows for the dashboard.
-     */
+    /** Get critical products formatted for the dashboard. */
     public function getCriticalProductsData(): array
     {
         $forecasts = $this->forecastDataProvider->getCriticalProducts();
@@ -129,12 +110,10 @@ class DashboardData
             ];
         }
 
-        // collect product ids
         $productIds = array_map(static function ($forecast) {
             return (int)($forecast->variation_id ?: $forecast->product_id);
         }, $forecasts);
 
-        // preload products
         $products = wc_get_products(
             [
                 'include' => $productIds,
@@ -146,8 +125,8 @@ class DashboardData
             ]
         );
 
-        // map products by id
         $productMap = [];
+
         foreach ($products as $product) {
             $productMap[$product->get_id()] = $product;
         }
@@ -215,7 +194,7 @@ class DashboardData
                     'label' => __('Stockout Risk', 'stock-forecast-for-woocommerce'),
                     'type'  => 'badge',
                     'class' => PrefixConfig::css('col-risk-level'),
-                ]
+                ],
             ],
             'class'   => PrefixConfig::css('table--striped'),
         ];

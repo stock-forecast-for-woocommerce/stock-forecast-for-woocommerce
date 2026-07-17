@@ -7,21 +7,14 @@ if (!defined('ABSPATH')) {
 }
 
 /**
- * Repository for WooCommerce product queries.
- *
- * Uses wc_product_meta_lookup for better performance.
+ * Queries WooCommerce products.
  *
  * @package StockForecastForWooCommerce\Sources
+ * @since   1.0.0
  */
 class WooCommerceSource
 {
-    /**
-     * Get paginated product IDs.
-     *
-     * @param int $limit
-     * @param int $afterId
-     * @return int[]       Product IDs.
-     */
+    /** Gets paginated product IDs. */
     public function getProductIds(int $limit, int $afterId = 0): array
     {
         global $wpdb;
