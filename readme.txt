@@ -116,3 +116,6 @@ Yes. The core plugin is and will remain free, licensed under GPL-2.0-or-later. A
 
 = 1.0.0 =
 Initial release. Predict stockouts before they happen with automated WooCommerce inventory forecasting.
+
+== Source Code ==
+Source code and build tools are available at: https://github.com/stock-forecast-for-woocommerce/stock-forecast-for-woocommerce/
